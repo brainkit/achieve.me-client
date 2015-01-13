@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>My App</title>  
+  
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="styles/onsen-css-components.css">
+
+  <script src="lib/onsen/js/angular/angular.js"></script>
+  <script src="lib/onsen/js/onsenui.js"></script>
+
+  <script>
+    ons.bootstrap();
+  </script>
+
+
+</head>
+
+<body>
+  <ons-page>
+
+    <div class="login-page">
+      <div class="logo-block">
+        <img src="images/logo@2x.png" alt="" width="225" height="44">
+      </div>
+
+      <div class="login-form">
+
+        <input type="email" placeholder="Email" class="text-input" value="">
+
+        <input type="password" placeholder="Пароль" class="text-input" value="">
+
+        <ons-button class="signup-button button--large">Регистрация</ons-button>
+
+        <ons-button class="login-button button--large button--light">Вход</ons-button>
+      </div>
+    </div>
+
+  </ons-page>
+
+</body>  
+</html>
