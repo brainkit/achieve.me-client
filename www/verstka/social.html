@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <title>My App</title>
+
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="styles/onsen-css-components.css">
+
+  <script src="lib/onsen/js/angular/angular.js"></script>
+  <script src="lib/onsen/js/onsenui.js"></script>
+
+  <script>
+    ons.bootstrap();
+  </script>
+
+
+</head>
+
+<body>
+  <ons-tabbar>
+    <ons-tab page="home.html" active="true">
+      <ons-icon icon="ion-home" class="tab-icon"></ons-icon>
+    </ons-tab>
+    <ons-tab page="home.html">
+      <ons-icon icon="ion-plus-round"></ons-icon>
+    </ons-tab>
+    <ons-tab page="home.html">
+      <ons-icon icon="ion-person"></ons-icon>
+    </ons-tab>
+    <ons-tab page="home.html">
+      <ons-icon icon="ion-gear-a"></ons-icon>
+    </ons-tab>
+  </ons-tabbar>
+
+  <ons-template id="home.html">
+    <ons-page>
+
+      <div class="hero">
+        <h1>Achieve.me использует <strong>публичное обещание.</strong></h1>
+        <p>Это пост в социальные сети, с обещанием вашим друзьям, что вы добьетесь своей цели.</p>
+      </div>
+
+      <div class="inner">
+        <p>Подключите социальную сеть, чтобы поставить себе цель.</p>
+      </div>
+
+      <ons-list class="social-types-list">
+        <ons-list-item>
+          <img src="images/wifi-icon.png" alt="" width="29" height="29" class="social-type-icon">
+          Вконтакте
+          <ons-switch class="pull-right"></ons-switch>
+        </ons-list-item>
+        <ons-list-item>
+          <img src="images/wifi-icon.png" alt="" width="29" height="29" class="social-type-icon">
+          Facebook
+          <ons-switch class="pull-right"></ons-switch>
+        </ons-list-item>
+        <ons-list-item>
+          <img src="images/wifi-icon.png" alt="" width="29" height="29" class="social-type-icon">
+          Google+
+          <ons-switch class="pull-right"></ons-switch>
+        </ons-list-item>
+        <ons-list-item>
+          <img src="images/wifi-icon.png" alt="" width="29" height="29" class="social-type-icon">
+          Mail.ru
+          <ons-switch class="pull-right"></ons-switch>
+        </ons-list-item>
+        <ons-list-item>
+          <img src="images/wifi-icon.png" alt="" width="29" height="29" class="social-type-icon">
+          Одноклассники
+          <ons-switch class="pull-right"></ons-switch>
+        </ons-list-item>
+      </ons-list>
+
+      <div class="inner">
+        <div class="blank h25"></div>
+        <ons-button class="button--large button--light">Подключить позже</ons-button>
+        <div class="blank h25"></div>
+
+      </div>
+    </ons-page>
+  </ons-template>
+
+
+
+
+</body>
+</html>
