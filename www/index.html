@@ -11,10 +11,16 @@
         <link rel="stylesheet" href="styles/app.css"/>
         <link rel="stylesheet" href="styles/onsen-css-components.css">
 
-        <script src="lib/onsen/js/angular/angular.js"></script>
-        <!--script src="lib/onsen/js/angular/angular-touch.js"></script-->
+        <script src="lib/onsen/js/angular/angular-file-upload-shim.min.js"></script> 
+        <script src="lib/onsen/js/angular/angular.js"></script> 
+        <script src="lib/onsen/js/angular/angular-touch.js"></script>         
+        <script src="lib/onsen/js/angular/angular-file-upload.min.js"></script> 
+        
+        <script src="lib/jquery-1.11.1.min.js"></script>
+        <script src="lib/fastclick.js"></script>
+        
          <script src="lib/onsen/js/angular/ng-cordova.js"></script>
-        <script src="lib/onsen/js/angular/app.js"></script>
+        <script src="js/app.js"></script>
         <script src="lib/onsen/js/onsenui.js"></script>
         <!--script type="text/javascript" src="cordova.js"></script-->
         <script>
@@ -150,6 +156,26 @@
        </ons-page>
      </ons-template>
     </script>
+<script>
+function gotoStart() {
+    var tabBar = $('#screenTabs')
+            .removeClass('screen__tabs-hidden')
+            .find('.tab-bar');
 
+    tabBar
+            .find('.screen__tabs-login')
+            .hide();
+
+    tabBar
+            .removeClass('ng-hide')
+            .addClass('animated fadeInUp');
+
+    screenTabs.setActiveTab(2);
+}
+
+$(function () {
+    FastClick.attach(document.body);
+});
+    </script>
 </body>  
 </html>
