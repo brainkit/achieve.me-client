@@ -154,9 +154,9 @@ form .ng-valid.ng-dirty
 }
 
 /*
- *	Profile page
- *
+ *	Profile page / Home page
  */
+
 
 .profile-card {
 	display: table;
@@ -199,11 +199,11 @@ form .ng-valid.ng-dirty
 }
 
 .profile-card .profile-photo img {
-	max-width: 100%;
-	height: auto;
-	-webkit-border-radius: 46px;
-	-moz-border-radius: 46px;
-	border-radius: 46px;
+	max-width: 85px;
+	height: 85px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
 	overflow: hidden;
 	border: 3px solid #ffffff;
 	display: block;

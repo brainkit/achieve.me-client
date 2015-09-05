@@ -7,7 +7,7 @@ function gotoStart() {
         .removeClass('ng-hide')
         .fadeIn();
 
-    screenTabs.setActiveTab(1);
+    screenTabs.setActiveTab(0);
 }
 
 function screenNaPushPage(id) {

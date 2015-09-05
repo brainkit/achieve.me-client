@@ -79,6 +79,8 @@
      * область действия $scope ons-navigator
      */
     Onsen.controller('mainCtrl', function ($scope, $http) {
+        $scope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
+        
         if(hash != null){
             ons.ready(function (){
                 gotoStart();
@@ -94,9 +96,6 @@
      * область действия $scope body
      */
     Onsen.controller('RegisterLoginFormCtrl', function ($scope, $http) {
-        //$scope.greeting = "Good Night!";
-        //$scope.startText = "Пара слов о том, что за приложение. Коротко, ясно, просто. И слоган :)";
-        
         $scope.register = function () {
             var url = serverName + "/api/user";
             //?hash=
@@ -132,5 +131,52 @@
                 });
         }
     });
+    
+    /*
+     * задаем контроллер для представления home.html
+     * для модуля Onsen
+     * область действия $scope body
+     */
+    Onsen.controller('HomeCtrl', function ($scope, $http) {
+        var url = serverName + "/api/user-settings?hash=" + hash;
+        $scope.userName = 'Новый пользователь';//заглушка аватарки по умолчанию
+        //для тулбара нужно перейти в родительский скопе
+        $scope.$parent.userName = $scope.userName;
+        $scope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
+        $scope.userLevel = 1;
+        $scope.userSubsCount = 0;
+        $scope.userSubscriberCount = 0;
+        $scope.countAch = 0;
+        console.log($scope);
+        $http.get(url).success(function (data){
+            console.log('user-settings '+data);
+            //console.log('data.name '+data.name);
+            if(data.name.trim() != ''){
+                $scope.userName = data.name;
+                $scope.$parent.userName = $scope.userName;
+            }
+            if(data.photo.trim() != ''){
+                $scope.userPhoto = data.photo;
+            }
+        }).error(function () {
+            //alert("error!");
+        });
 
+        var url = serverName + "/api/user-achievements?hash=" + hash;
+        $http.get(url).success(function (data){
+            console.log('user-achievements '+data);
+            $scope.itemAch = data.data;
+            $scope.itemAch = [{title:"Тестовая цель один", description:'описание цели один'},{title:"Тестовая цель два", description:'описание цели два'}]
+        }).error(function () {
+            //alert("error!");
+        });
+
+        var url = serverName + "/api/user-achievements-count?hash=" + hash;
+        $http.get(url).success(function (data){
+            console.log('user-achievements-count '+data);
+            $scope.countAch = parseInt(data);
+        }).error(function () {
+            //alert("error!");
+        });
+    });
 })();
