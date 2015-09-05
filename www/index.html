@@ -1,181 +1,233 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" ng-app="achieveMeApp">
     <head>
         <meta charset="utf-8">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="mobile-web-app-capable" content="yes">
-
-        <title>My App</title>  
-
-        <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-        <link rel="stylesheet" href="styles/app.css"/>
-        <link rel="stylesheet" href="styles/onsen-css-components.css">
-
-        <script src="lib/onsen/js/angular/angular-file-upload-shim.min.js"></script> 
-        <script src="lib/onsen/js/angular/angular.js"></script> 
-        <script src="lib/onsen/js/angular/angular-touch.js"></script>         
-        <script src="lib/onsen/js/angular/angular-file-upload.min.js"></script> 
         
+        <link rel="apple-touch-icon" sizes="57x57" href="icon/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="icon/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="icon/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="icon/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="icon/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="icon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="icon/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="icon/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="icon/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="icon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+        <link rel="manifest" href="icon/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+
+        <title>Achieve.Me</title>  
+
+        <link rel="stylesheet" href="lib/onsen/css/onsenui.css"> 
+        <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
+        <link rel="stylesheet" href="styles/app.css"/>
+        <link rel="stylesheet" href="styles/animate.css"/>
+        
+        <script src="lib/onsen/js/angular/angular.js"></script>
+        <script src="lib/onsen/js/angular/angular-local-storage.min.js"></script>
+        <script src="lib/onsen/js/angular/angular-touch.min.js"></script>
+        <script src="lib/onsen/js/angular/angular-resource.min.js"></script>
+        <script src="lib/onsen/js/angular/angular-route.min.js"></script>
+        <script src="lib/onsen/js/angular/angular-file-upload.min.js"></script>
+        <script src="lib/onsen/js/angular/angular-file-upload-shim.min.js"></script>
+        <script src="lib/onsen/js/angular/ng-cordova.min.js"></script>
+        <script src="lib/onsen/js/onsenui.min.js"></script>
         <script src="lib/jquery-1.11.1.min.js"></script>
         <script src="lib/fastclick.js"></script>
         
-         <script src="lib/onsen/js/angular/ng-cordova.js"></script>
         <script src="js/app.js"></script>
-        <script src="lib/onsen/js/onsenui.js"></script>
         <!--script type="text/javascript" src="cordova.js"></script-->
         <script>
-
-            ons.bootstrap();
+            //ons.bootstrap();
         </script>
-
-
     </head>
 
     <body>
-
-    <ons-tabbar>
-        <ons-tab page="login.html" active="true">
-            <ons-icon icon="ion-home" class="tab-icon"></ons-icon>
-        </ons-tab>
-        <ons-tab page="home.html">
-            <ons-icon icon="ion-plus-round"></ons-icon>
+    <ons-tabbar
+        class="screen__tabs"
+        id="screenTabs"
+        var="screenTabs"
+        hide-tabs="true"
+        animation="fade" >
+        <ons-tab page="startup.html" active="true" class="screen__tabs-login" ng-hide="true">
+            <ons-icon
+                icon="ion-locked">
+            </ons-icon>
         </ons-tab>
         <ons-tab page="profile.html">
-            <ons-icon icon="ion-person"></ons-icon>
+            <ons-icon
+                icon="ion-home">
+            </ons-icon>
         </ons-tab>
-        <ons-tab page="home.html">
-            <ons-icon icon="ion-gear-a"></ons-icon>
+        <ons-tab page="profile.html">
+            <ons-icon
+                icon="ion-plus-round">
+            </ons-icon>
+        </ons-tab>
+        <ons-tab page="profile.html">
+            <ons-icon
+                icon="ion-person">
+            </ons-icon>
+        </ons-tab>
+        <ons-tab page="profile.html">
+            <ons-icon
+                icon="ion-gear-a">
+            </ons-icon>
         </ons-tab>
     </ons-tabbar>
 
-    <script type="text/ons-template" id="login.html">
-        <ons-navigator id="screenNav"  var="nav">
-            <div ng-controller="StartUp">
-                <ons-page>
-                    <div class="login-page">
-                        <div class="logo-block">
-                            <img src="images/logo@2x.png" alt="" width="225" height="44">
-                        </div>
-
-                        <div class="login-form">
-
-                            <input type="email" placeholder="Email" class="text-input" value="">
-
-                            <input type="password" placeholder="Пароль" class="text-input" value="">
-
-                            <ons-button class="signup-button button--large">Регистрация</ons-button>
-
-                            <ons-button class="login-button button--large button--light">Вход</ons-button>
-                        </div>
+    <script type="text/ons-template" id="startup.html">
+        <ons-navigator id="screenNav" var="nav">
+            <ons-page>
+                <div class="register-login-page" ng-controller="RegisterLoginFormCtrl">
+                    <div class="logo-block">
+                        <img src="images/logo@2x.png" alt="logo">
                     </div>
-
-                </ons-page>
-            </div>
+                    <div class="register-login-form">
+                        <form 
+                            name="registerLoginForm"
+                            id="registerLoginForm"
+                            method="post">
+                            <div class="form-control-holder">
+                                <input 
+                                    type="email"
+                                    name="email"
+                                    ng-model="email"
+                                    placeholder="Email"
+                                    class="text-input form-control"
+                                    value=""
+                                    required="true" />
+                                <div class="error" ng-show="registerLoginForm.email.$invalid && registerLoginForm.email.$dirty">
+                                    <span ng-show="registerLoginForm.email.$error.email">
+                                        Введите праивльный email
+                                    </span>
+                                    <span ng-show="registerLoginForm.email.$error.required">
+                                        Поле не должно быть пустым
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-control-holder">
+                                <input
+                                    type="password"
+                                    name="password"
+                                    ng-model="password"
+                                    ng-minlength="3"
+                                    placeholder="Пароль"
+                                    class="text-input form-control"
+                                    value=""
+                                    required="true" />
+                                <div class="error" ng-show="registerLoginForm.password.$invalid && registerLoginForm.password.$dirty">
+                                    <span ng-show="registerLoginForm.password.$error.required">
+                                        Поле не должно быть пустым
+                                    </span>
+                                    <span ng-show="registerLoginForm.password.$error.minlength">
+                                        Поле должно содержать более 3-х символов
+                                    </span>
+                                </div>
+                            </div>
+                            <ons-button
+                                ng-disabled="registerLoginForm.$invalid"
+                                ng-click="register()"
+                                class="signup-button button--large">
+                                Регистрация
+                            </ons-button>
+                            <ons-button
+                                ng-disabled="registerLoginForm.$invalid"
+                                ng-click="login()"
+                                class="login-button button--large button--light">
+                                Вход
+                            </ons-button>
+                        </form>
+                    </div>
+                </div>
+            </ons-page>
         </ons-navigator>
     </script>
     <script type="text/ons-template" id="profile.html">
-     <ons-template id="profile.html">
-       <ons-page>
+        <ons-navigator>
+            <ons-page>
+                <ons-toolbar>
+                    <div class="center">Вася</div>
+                </ons-toolbar>
 
-         <ons-toolbar>
-           <div class="center">Вася</div>
-         </ons-toolbar>
+                <div class="hero">
+                    <div class="profile-card">
+                        <div class="profile-level">
+                            <div class="circle">
+                                <div class="value">213</div>
+                                <div class="label">ур.</div>
+                            </div>
+                        </div>
 
-         <div class="hero">
-           <div class="profile-card">
-             <div class="profile-level">
-               <div class="circle">
-                 <div class="value">213</div>
-                 <div class="label">ур.</div>
-               </div>
-             </div>
+                        <div class="profile-photo">
+                            <div class="user-photo">
+                                <img src="images/user-photo-large.jpg" alt="" width="85" height="85">
+                            </div>
+                        </div>
 
-             <div class="profile-photo">
-               <div class="user-photo">
-                 <img src="images/user-photo-large.jpg" alt="" width="85" height="85">
-               </div>
-             </div>
+                        <div class="profile-actions">
+                            <ons-button class="follow">
+                                <i class="icon user"></i>
+                                <i class="icon add"></i>
+                            </ons-button>
+                        </div>
+                    </div>
+                </div>
 
-             <div class="profile-actions">
-               <ons-button class="follow">
-                 <i class="icon user"></i>
-                 <i class="icon add"></i>
-               </ons-button>
-             </div>
-           </div>
-         </div>
+                <ons-list class="">
+                    <ons-list-item modifier="chevron">
+                        Подписчики <span class="number">53</span>
+                    </ons-list-item>
 
-         <ons-list class="">
-           <ons-list-item modifier="chevron">
-             Подписчики <span class="number">53</span>
-           </ons-list-item>
+                    <ons-list-item modifier="chevron">
+                        Подписки <span class="number">41</span>
+                    </ons-list-item>
+                </ons-list>
 
-           <ons-list-item modifier="chevron">
-             Подписки <span class="number">41</span>
-           </ons-list-item>
-         </ons-list>
+                <div class="divider"></div>
 
-         <div class="divider"></div>
+                <ons-list class="goals-list">
+                    <ons-list-item class="header">
+                        <strong>Цели</strong><span class="number">4</span>
+                    </ons-list-item>
 
-         <ons-list class="goals-list">
-           <ons-list-item class="header">
-             <strong>Цели</strong><span class="number">4</span>
-           </ons-list-item>
+                    <ons-list-item modifier="chevron">
+                        <ons-row>
+                            <ons-col>
+                                <div class="title">Почистить зубы</div>
+                                <div class="status green"><i class="icon fav green"></i>1 000 Р<i class="icon fav green"></i>Достигнуто</div>
+                            </ons-col>
+                        </ons-row>
+                    </ons-list-item>
 
-           <ons-list-item modifier="chevron">
-             <ons-row>
-               <ons-col>
-                 <div class="title">Почистить зубы</div>
-                 <div class="status green"><i class="icon fav green"></i>1 000 Р<i class="icon fav green"></i>Достигнуто</div>
-               </ons-col>
-             </ons-row>
-           </ons-list-item>
+                    <ons-list-item modifier="chevron">
+                        <ons-row>
+                            <ons-col>
+                                <div class="title">Сделать зарядку</div>
+                                <div class="status gray"><i class="icon fav gray"></i>1 100 Р<i class="icon fav gray"></i>Провалено</div>
+                            </ons-col>
+                        </ons-row>
+                    </ons-list-item>
 
-           <ons-list-item modifier="chevron">
-             <ons-row>
-               <ons-col>
-                 <div class="title">Сделать зарядку</div>
-                 <div class="status gray"><i class="icon fav gray"></i>1 100 Р<i class="icon fav gray"></i>Провалено</div>
-               </ons-col>
-             </ons-row>
-           </ons-list-item>
-
-           <ons-list-item modifier="chevron">
-             <ons-row>
-               <ons-col>
-                 <div class="title">Позавтракать</div>
-                 <div class="status blue"><i class="icon fav blue"></i>1 000 Р<i class="icon fav blue"></i>7 дней</div>
-               </ons-col>
-             </ons-row>
-           </ons-list-item>
-         </ons-list>
-
-
-
-
-       </ons-page>
-     </ons-template>
+                    <ons-list-item modifier="chevron">
+                        <ons-row>
+                            <ons-col>
+                                <div class="title">Позавтракать</div>
+                                <div class="status blue"><i class="icon fav blue"></i>1 000 Р<i class="icon fav blue"></i>7 дней</div>
+                            </ons-col>
+                        </ons-row>
+                    </ons-list-item>
+                </ons-list>
+            </ons-page>
+        </ons-navigator>
     </script>
-<script>
-function gotoStart() {
-    var tabBar = $('#screenTabs')
-            .removeClass('screen__tabs-hidden')
-            .find('.tab-bar');
-
-    tabBar
-            .find('.screen__tabs-login')
-            .hide();
-
-    tabBar
-            .removeClass('ng-hide')
-            .addClass('animated fadeInUp');
-
-    screenTabs.setActiveTab(2);
-}
-
-$(function () {
-    FastClick.attach(document.body);
-});
-    </script>
+    <script src="js/script.js"></script>
 </body>  
 </html>

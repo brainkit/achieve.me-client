@@ -48,22 +48,19 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
-  background-color: #f9f9f9;
+  font-size: 15px;
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
   overflow: visible;
-  font-size: 17px;
   color: #1f1f21;
 }
 .page::-webkit-scrollbar {
   display: none;
 }
 .page__content {
-  background-color: #f9f9f9;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -75,7 +72,7 @@ h6 {
   margin-top: -1px;
 }
 .page__background {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -117,8 +114,6 @@ h6 {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  position: relative;
-  overflow: hidden;
   font-size: 17px;
   padding: 0 20px;
   border: none;
@@ -141,16 +136,12 @@ h6 {
   z-index: 1;
   vertical-align: top;
   outline: none;
-  width: 100%;
-  height: 100%;
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
   width: 51px;
   height: 44px;
   margin-top: -6px;
-  top: 0px;
-  left: 0px;
   -webkit-transition: all 0.2s linear;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
@@ -186,13 +177,22 @@ h6 {
   background-clip: padding-box;
   position: absolute;
   content: '';
-  -webkit-border-radius: 28px;
-  border-radius: 28px;
-  height: 28px;
-  width: 28px;
-  background-color: #fff;
-  left: 2px;
-  top: 2px;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  height: 30px;
+  width: 30px;
+  background: #ffffff;
+  background: -moz-linear-gradient(top,  #ffffff 0%, #f6f6f6 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#f6f6f6));
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#f6f6f6 100%);
+  background: -o-linear-gradient(top,  #ffffff 0%,#f6f6f6 100%);
+  background: -ms-linear-gradient(top,  #ffffff 0%,#f6f6f6 100%);
+  background: linear-gradient(to bottom,  #ffffff 0%,#f6f6f6 100%);
+  -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+  left: 1px;
+  top: 1px;
   -webkit-transition-property: all;
   -moz-transition-property: all;
   -o-transition-property: all;
@@ -210,11 +210,11 @@ h6 {
   background-color: #4dd965;
 }
 .switch__input:checked + .switch__toggle:before {
-  -webkit-transform: translateX(18px);
-  -moz-transform: translateX(18px);
-  -ms-transform: translateX(18px);
-  -o-transform: translateX(18px);
-  transform: translateX(18px);
+  -webkit-transform: translateX(19px);
+  -moz-transform: translateX(19px);
+  -ms-transform: translateX(19px);
+  -o-transform: translateX(19px);
+  transform: translateX(19px);
 }
 .switch__input:not(:checked) + .switch__toggle:before {
   -webkit-transform: translateX(0px);
@@ -268,7 +268,6 @@ h6 {
   color: inherit;
   background: transparent;
   border: none;
-  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -278,12 +277,6 @@ h6 {
   outline: none;
   line-height: 1;
   -webkit-appearance: none;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  border: none;
-  height: 2px;
-  -webkit-border-radius: 0;
-  border-radius: 0;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#e1e5eb), to(#e1e5eb));
@@ -366,7 +359,7 @@ h6 {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
+  font-weight: bolder;
   font-size: 17px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -374,13 +367,9 @@ h6 {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   white-space: nowrap;
-  overflow: hidden;
   word-spacing: 0;
   padding: 0;
   margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   cursor: default;
@@ -391,30 +380,13 @@ h6 {
   z-index: 2;
   display: block;
   height: 44px;
-  padding-left: 0;
-  padding-right: 0;
   background: #fff;
   color: #444;
   -webkit-box-shadow: none;
   box-shadow: none;
   border-bottom: 1px solid #dee1e5;
-  font-weight: 400;
   width: 100%;
-  white-space: nowrap;
   overflow: visible;
-}
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .navigation-bar {
-    border-bottom: none;
-    -webkit-background-size: 100% 1px;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-image: -webkit-linear-gradient(90deg, #dee1e5, #dee1e5 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #dee1e5, #dee1e5 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #dee1e5, #dee1e5 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #dee1e5, #dee1e5 50%, transparent 50%);
-  }
 }
 .navigation-bar__line-height {
   line-height: 44px;
@@ -441,7 +413,6 @@ h6 {
   border: none;
   line-height: normal;
   height: 44px;
-  vertical-align: top;
   overflow: visible;
   display: block;
   vertical-align: middle;
@@ -462,13 +433,11 @@ h6 {
   text-align: center;
   line-height: 44px;
   font-size: 17px;
-  font-weight: 500;
   color: #444;
 }
 .navigation-bar__title {
   line-height: 44px;
   font-size: 17px;
-  font-weight: 500;
   color: #444;
   margin: 0;
   padding: 0;
@@ -518,51 +487,7 @@ h6 {
       </div>
     </div>
 */
-/* topdoc
-  name: Android-like Navigation Bar
-  class: navigation-bar--android
-  hint: .navigation-bar--android
-  use: Navigation Bar, Toolbar Button
-  markup:
-    <div class="navigation-bar navigation-bar--android">
-      <div class="navigation-bar__left navigation-bar--android__left">
-        <span class="toolbar-button navigation-bar__line-height" style="padding:0 5px 0 5px;"><i class="ion-android-arrow-back" style="font-size:20px;"></i></span>
-      </div>
-      <div class="navigation-bar__center navigation-bar--android__center">
-        <span class="toolbar-button navigation-bar__line-height" style="padding:0">
-          <i class="ion-cube" style="font-size:20px;"></i> App Bar
-        </span>
-      </div>
-      <div class="navigation-bar__right navigation-bar--android__right">
-        <span class="toolbar-button--quiet navigation-bar__line-height">
-          <i class="ion-android-share" style="font-size:20px;"></i>
-        </span>
-        <span class="toolbar-button--quiet navigation-bar__line-height">
-          <i class="ion-android-more" style="font-size:20px;"></i>
-        </span>
-      </div>
-    </div>
-*/
-.navigation-bar--android__left {
-  float: left;
-  text-align: left;
-  width: auto;
-  min-width: 10px;
-}
-.navigation-bar--android__center {
-  float: left;
-  text-align: left;
-  width: auto;
-  max-width: 50%;
-}
-.navigation-bar--android__right {
-  float: right;
-  text-align: right;
-  width: auto;
-}
-.navigation-bar--android__center:first-child:last-child {
-  padding-left: 10px;
-}
+
 /* topdoc
   name: Android-like Navigation Bar(2)
   use: Android-like Navigation Bar
@@ -682,9 +607,6 @@ h6 {
   word-spacing: 0;
   padding: 0;
   margin: 0;
-  font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   cursor: default;
@@ -695,14 +617,10 @@ h6 {
   z-index: 2;
   display: block;
   height: 44px;
-  padding-left: 0;
-  padding-right: 0;
   background: #fff;
   color: #444;
   -webkit-box-shadow: none;
   box-shadow: none;
-  font-weight: 400;
-  border-bottom: none;
   border-top: 1px solid #dee1e5;
   position: absolute;
   bottom: 0px;
@@ -768,24 +686,18 @@ h6 {
 .button {
   position: relative;
   display: inline-block;
-  vertical-align: top;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
-  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -796,16 +708,15 @@ h6 {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 10px;
+  padding: 4px 12px;
   font-size: 17px;
-  line-height: 32px;
+  line-height: 24px;
   letter-spacing: 0;
   color: #fff;
   vertical-align: middle;
   background-color: #13aefe;
-  border: 0px solid currentColor;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -869,9 +780,9 @@ h6 {
     <button class="button button--light" disabled>Button</button>
 */
 .button--light {
-  background-color: transparent;
-  color: rgba(0,0,0,0.4);
-  border: 1px solid rgba(0,0,0,0.2);
+  background-color: #e6e9ef;
+  color: #999fa2;
+  border: none;
 }
 .button--light:active {
   background-color: rgba(0,0,0,0.05);
@@ -889,19 +800,13 @@ h6 {
 .button--quiet {
   position: relative;
   display: inline-block;
-  vertical-align: top;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -918,21 +823,15 @@ h6 {
   height: auto;
   text-decoration: none;
   padding: 4px 10px;
-  font-size: 17px;
   line-height: 32px;
   letter-spacing: 0;
-  color: #fff;
   vertical-align: middle;
-  background-color: #13aefe;
-  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  background: transparent;
-  border: 1px solid transparent;
   -webkit-box-shadow: none;
   box-shadow: none;
   background: transparent;
@@ -975,19 +874,13 @@ h6 {
 .button--cta {
   position: relative;
   display: inline-block;
-  vertical-align: top;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -1004,13 +897,9 @@ h6 {
   height: auto;
   text-decoration: none;
   padding: 4px 10px;
-  font-size: 17px;
   line-height: 32px;
   letter-spacing: 0;
-  color: #fff;
   vertical-align: middle;
-  background-color: #13aefe;
-  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
@@ -1053,9 +942,9 @@ h6 {
     <button class="button button--large">Button</button>
 */
 .button--large {
-  font-size: 17px;
+  line-height: 24px;
+  font-size: 15px;
   font-weight: 500;
-  line-height: 36px;
   padding: 4px 12px;
   display: block;
   width: 100%;
@@ -1096,24 +985,16 @@ h6 {
 */
 .button--large--quiet {
   position: relative;
-  display: inline-block;
-  vertical-align: top;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
   font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
@@ -1125,21 +1006,14 @@ h6 {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 10px;
-  font-size: 17px;
-  line-height: 32px;
   letter-spacing: 0;
-  color: #fff;
   vertical-align: middle;
-  background-color: #13aefe;
-  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  font-size: 17px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 12px;
@@ -1187,24 +1061,17 @@ h6 {
 */
 .button--large--cta {
   position: relative;
-  display: inline-block;
-  vertical-align: top;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
-  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
   font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
@@ -1216,24 +1083,16 @@ h6 {
   overflow: hidden;
   height: auto;
   text-decoration: none;
-  padding: 4px 10px;
-  font-size: 17px;
-  line-height: 32px;
   letter-spacing: 0;
   color: #fff;
   vertical-align: middle;
-  background-color: #13aefe;
-  border: 0px solid currentColor;
   -webkit-border-radius: 3px;
   border-radius: 3px;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  border: none;
   background-color: #13aefe;
-  color: #fff;
-  font-size: 17px;
   font-weight: 500;
   line-height: 36px;
   padding: 4px 12px;
@@ -1308,12 +1167,9 @@ h6 {
   width: auto;
   -webkit-border-radius: 0;
   border-radius: 0;
-  position: relative;
-  position: relative;
   overflow: hidden;
   padding: 0;
   position: relative;
-  overflow: hidden;
 }
 .button-bar__item > input {
   position: absolute;
@@ -1353,16 +1209,13 @@ h6 {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
   -webkit-border-radius: inherit;
   border-radius: inherit;
   background-color: transparent;
   color: #13aefe;
-  border: 0px solid #13aefe;
-  border-top: 1px solid #13aefe;
-  border-bottom: 1px solid #13aefe;
-  border-right: 1px solid #13aefe;
+  border-style: solid;
+  border-width: 1px 1px 1px 0;
+  border-color: #13aefe;
   font-weight: 400;
   padding: 0 8px;
   height: 27px;
@@ -1380,10 +1233,9 @@ h6 {
 .button-bar__button:active,
 :active + .button-bar__button {
   background-color: rgba(19,174,254,0.2);
-  border: 0px solid #13aefe;
-  border-top: 1px solid #13aefe;
-  border-bottom: 1px solid #13aefe;
-  border-right: 1px solid #13aefe;
+  border-style: solid;
+  border-width: 1px 1px 1px 0;
+  border-color: #13aefe;
   height: 27px;
   line-height: 27px;
   font-size: 13px;
@@ -1520,19 +1372,6 @@ h6 {
   border-top: 1px solid #d5d8db;
   width: 100%;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .tab-bar {
-    border-top: none;
-    -webkit-background-size: 100% 1px;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: top;
-    background-image: -webkit-linear-gradient(270deg, #d5d8db, #d5d8db 50%, transparent 50%);
-    background-image: -moz-linear-gradient(270deg, #d5d8db, #d5d8db 50%, transparent 50%);
-    background-image: -o-linear-gradient(270deg, #d5d8db, #d5d8db 50%, transparent 50%);
-    background-image: linear-gradient(180deg, #d5d8db, #d5d8db 50%, transparent 50%);
-  }
-}
 .tab-bar__item {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -1572,8 +1411,7 @@ h6 {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
+  font-size: 22px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -1581,11 +1419,8 @@ h6 {
   background-clip: padding-box;
   padding: 0;
   margin: 0;
-  font: inherit;
-  color: inherit;
   background: transparent;
   border: none;
-  line-height: normal;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1595,20 +1430,21 @@ h6 {
   white-space: nowrap;
   overflow: hidden;
   text-decoration: none;
-  padding: 0;
   height: 49px;
   letter-spacing: 0;
   color: #13a2fe;
-  text-shadow: 0 1px none;
-  vertical-align: top;
-  background-color: transparent;
+  text-shadow: none;
   -webkit-box-shadow: none;
   box-shadow: none;
-  border-top: none;
   width: 100%;
   font-weight: 400;
   line-height: 49px;
 }
+.tab-bar__button .ons-icon--ion {
+  vertical-align: -15%;
+}
+
+
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .tab-bar__button {
     border-top: none;
@@ -1830,18 +1666,13 @@ h6 {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
-  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -1862,7 +1693,6 @@ h6 {
   font-size: 16px;
   min-width: 19px;
   line-height: 19px;
-  font-weight: 400;
 }
 /* topdoc
   name: Toolbar Button
@@ -1891,15 +1721,12 @@ h6 {
   font-size: 17px;
   padding: 4px 10px;
   letter-spacing: 0;
-  color: #13aefe;
-  text-shadow: 0 1px none;
-  vertical-align: baseline;
+  color: #dadee5;
+  text-shadow: none;
   background-color: rgba(0,0,0,0);
   -webkit-border-radius: 2px;
   border-radius: 2px;
   border: 1px solid transparent;
-  font-weight: 400;
-  font-size: 17px;
   -webkit-transition: none;
   -moz-transition: none;
   -o-transition: none;
@@ -2005,7 +1832,6 @@ h6 {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 17px;
-  position: relative;
   overflow: hidden;
   height: 24px;
   pointer-events: none;
@@ -2023,8 +1849,6 @@ h6 {
   z-index: 1;
   vertical-align: top;
   outline: none;
-  width: 100%;
-  height: 100%;
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
@@ -2078,7 +1902,6 @@ h6 {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 17px;
-  position: relative;
   overflow: hidden;
   width: 24px;
   height: 24px;
@@ -2175,7 +1998,6 @@ h6 {
   font-size: 17px;
   line-height: 24px;
   margin: 10px 0;
-  position: relative;
   overflow: hidden;
 }
 .checkbox--noborder > .checkbox__checkmark {
@@ -2208,8 +2030,6 @@ h6 {
   z-index: 1;
   vertical-align: top;
   outline: none;
-  width: 100%;
-  height: 100%;
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
@@ -2325,8 +2145,6 @@ h6 {
   z-index: 1;
   vertical-align: top;
   outline: none;
-  width: 100%;
-  height: 100%;
   margin: 0;
   -webkit-appearance: none;
   appearance: none;
@@ -2354,7 +2172,6 @@ h6 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  position: relative;
   overflow: hidden;
   line-height: 24px;
   text-align: left;
@@ -2374,8 +2191,6 @@ h6 {
   height: 24px;
   background: transparent;
   border: none;
-  -webkit-border-radius: var-border-radius--checkbox;
-  border-radius: var-border-radius--checkbox;
   left: 0;
 }
 .radio-button__checkmark {
@@ -2397,9 +2212,7 @@ h6 {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 17px;
-  position: relative;
   overflow: hidden;
-  position: relative;
   width: 24px;
   height: 24px;
   background: transparent;
@@ -2411,10 +2224,6 @@ h6 {
 .radio-button__checkmark:after {
   content: '';
   position: absolute;
-  -webkit-border-radius: 100%;
-  border-radius: 100%;
-  top: 50%;
-  left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -2462,7 +2271,6 @@ h6 {
 }
 .list__header {
   margin: 0;
-  padding: 0;
   list-style: none;
   text-align: left;
   display: block;
@@ -2498,7 +2306,6 @@ h6 {
   margin: 0;
   font: inherit;
   color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   cursor: default;
@@ -2510,36 +2317,18 @@ h6 {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
-  padding: 0;
-  margin: 0;
+  font-size: 15px;
   list-style-type: none;
   text-align: left;
   overflow: auto;
   display: block;
   -webkit-overflow-scrolling: touch;
-  padding: 0;
-  background-color: #fff;
   border-top: 1px solid #e1e5eb;
   border-bottom: 1px solid #e1e5eb;
   background-color: #fff;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list {
-    border: none;
-    -webkit-background-size: 100% 1px, 100% 1px;
-    background-size: 100% 1px, 100% 1px;
-    background-repeat: no-repeat;
-    background-position: bottom, top;
-    background-image: -webkit-linear-gradient(90deg, #e1e5eb, #e1e5eb 50%, transparent 50%), -webkit-linear-gradient(270deg, #e1e5eb, #e1e5eb 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #e1e5eb, #e1e5eb 50%, transparent 50%), -moz-linear-gradient(270deg, #e1e5eb, #e1e5eb 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #e1e5eb, #e1e5eb 50%, transparent 50%), -o-linear-gradient(270deg, #e1e5eb, #e1e5eb 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #e1e5eb, #e1e5eb 50%, transparent 50%), linear-gradient(180deg, #e1e5eb, #e1e5eb 50%, transparent 50%);
-  }
-}
 .list__item {
   margin: 0;
-  padding: 0;
   position: relative;
   list-style: none;
   -webkit-box-sizing: border-box;
@@ -2547,10 +2336,9 @@ h6 {
   box-sizing: border-box;
   display: block;
   padding: 0 10px 0 10px;
-  margin: 0 0 0 0;
   border-top: none;
   border-bottom: 1px solid #e1e5eb;
-  color: #1f1f21;
+  color: #444444;
   background-color: transparent;
   min-height: 44px;
   line-height: 44px;
@@ -2580,19 +2368,7 @@ h6 {
   border-top: none;
   border-bottom: none;
 }
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .list__item:not(:last-child) {
-    border-bottom: none;
-    -webkit-background-size: 100% 1px;
-    background-size: 100% 1px;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-image: -webkit-linear-gradient(90deg, #e1e5eb, #e1e5eb 50%, transparent 50%);
-    background-image: -moz-linear-gradient(90deg, #e1e5eb, #e1e5eb 50%, transparent 50%);
-    background-image: -o-linear-gradient(90deg, #e1e5eb, #e1e5eb 50%, transparent 50%);
-    background-image: linear-gradient(0deg, #e1e5eb, #e1e5eb 50%, transparent 50%);
-  }
-}
+
 /* topdoc
   name: Noborder List
   class: list--noborder
@@ -2905,13 +2681,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   display: none;
 }
 .search-input {
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -2924,15 +2695,11 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
   -webkit-appearance: none;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   height: 31px;
   font-size: 15px;
-  border: 1px solid #e1e5eb;
-  background-color: #f9f9f9;
+  border: 1px solid #dee1e5;
+  background-color: #fbfbfc;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
@@ -2944,14 +2711,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-repeat: no-repeat;
   -webkit-background-size: 17px;
   background-size: 17px;
-  font-weight: 400;
   display: block;
   width: 100%;
 }
 .search-input:focus {
-  background-color: #f9f9f9;
+  background-color: #fbfbfc;
   color: #1f1f21;
-  border: 1px solid #e1e5eb;
+  border: 1px solid #dee1e5;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -2982,13 +2748,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <input type="text" class="text-input" placeholder="text" value="" disabled>
 */
 .text-input {
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -3001,26 +2762,24 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
   letter-spacing: 0;
-  border: 1px solid #e1e5eb;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background-color: #f9f9f9;
+  border: 1px solid #dee1e5;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background-color: #fbfbfc;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
   padding: 4px 8px 0 8px;
-  margin: 0;
   font-size: 15px;
   height: 31px;
-  font-weight: 400;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
 }
-.text-input::-webkit-input-placeholder,
-.text-input::-moz-placeholder,
+.text-input::-webkit-input-placeholder {
+  color: #999;
+}
+.text-input::-moz-placeholder {
+  color: #999;
+}
 .text-input::-ms-input-placeholder {
   color: #999;
 }
@@ -3029,8 +2788,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   cursor: default;
   pointer-events: none;
 }
-.text-input:disabled::-webkit-input-placeholder,
-.text-input:disabled::-moz-placeholder,
+.text-input:disabled::-webkit-input-placeholder {
+  color: #999;
+}
+.text-input:disabled::-moz-placeholder {
+  color: #999;
+}
 .text-input:disabled:-ms-input-placeholder {
   color: #999;
 }
@@ -3047,13 +2810,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <input type="text" class="text-input--transparent" placeholder="text" value="" disabled>
 */
 .text-input--transparent {
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -3066,27 +2824,17 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
   letter-spacing: 0;
-  border: 1px solid #e1e5eb;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  background-color: #f9f9f9;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
-  padding: 4px 8px 0 8px;
-  margin: 0;
+  padding: 4px 0 0 0;
   font-size: 15px;
   height: 31px;
-  font-weight: 400;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   border: none;
   background-color: transparent;
-  padding-left: 0;
-  padding-right: 0;
 }
 .text-input--transparent:disabled {
   opacity: 0.3;
@@ -3103,7 +2851,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
 }
 .text-input--transparent:invalid {
-  border: 1px solid var-input-invalid-border-color;
   color: #1f1f21;
   border: none;
   background-color: transparent;
@@ -3117,13 +2864,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
     <input type="text" class="text-input--underbar" placeholder="text" value="" disabled>
 */
 .text-input--underbar {
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
-  line-height: normal;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -3136,26 +2878,16 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
   letter-spacing: 0;
-  border: 1px solid #e1e5eb;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  background-color: #f9f9f9;
   -webkit-box-shadow: none;
   box-shadow: none;
   color: #1f1f21;
   padding: 4px 8px 0 8px;
-  margin: 0;
   font-size: 15px;
   height: 31px;
-  font-weight: 400;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid #e1e5eb;
+  border-bottom: 1px solid #dee1e5;
   -webkit-border-radius: 0px;
   border-radius: 0px;
 }
@@ -3165,7 +2897,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   pointer-events: none;
   border: none;
   background-color: transparent;
-  border-bottom: 1px solid #e1e5eb;
+  border-bottom: 1px solid #dee1e5;
 }
 .text-input--underbar:disabled::-webkit-input-placeholder,
 .text-input--underbar:disabled::-moz-placeholder,
@@ -3175,7 +2907,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   background-color: transparent;
 }
 .text-input--underbar:invalid {
-  border: 1px solid var-input-invalid-border-color;
   color: #1f1f21;
   border: none;
   background-color: transparent;
@@ -3196,12 +2927,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
-  border: none;
   line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -3212,12 +2939,10 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   resize: none;
   outline: none;
   padding: 5px 5px 5px 5px;
-  font-size: var-font-size--text-input;
-  font-weight: 400;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  border: 1px solid #e1e5eb;
-  background-color: #f9f9f9;
+  border: 1px solid #dee1e5;
+  background-color: #fbfbfc;
   color: #1f1f21;
   letter-spacing: 0;
   -webkit-box-shadow: none;
@@ -3249,11 +2974,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -3264,14 +2986,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   vertical-align: top;
   resize: none;
   outline: none;
-  padding: 5px 5px 5px 5px;
-  padding-left: 0;
-  padding-right: 0;
-  font-size: var-font-size--text-input;
-  font-weight: 400;
+  padding: 5px 0 5px 0;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  border: none;
   background-color: transparent;
   color: #1f1f21;
   letter-spacing: 0;
@@ -3284,8 +3001,12 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   cursor: default;
   pointer-events: none;
 }
-.textarea--transpanret::-webkit-input-placeholder,
-.textarea--transparent::-moz-placeholder,
+.textarea--transpanret::-webkit-input-placeholder {
+  color: #999;
+}
+.textarea--transparent::-moz-placeholder {
+  color: #999;
+}
 .textarea--transparent:-ms-input-placeholder {
   color: #999;
 }
@@ -3307,10 +3028,8 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   padding: 0;
-  margin: 0;
   font: inherit;
   color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   cursor: default;
@@ -3347,7 +3066,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   margin: 0;
   font: inherit;
   color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   cursor: default;
@@ -3386,11 +3104,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
-  margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   cursor: default;
@@ -3427,8 +3141,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 400;
-  font-size: 17px;
   font-size: 17px;
   font-weight: 500;
   padding: 0px 8px 0px 8px;
@@ -3456,18 +3168,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
-  background: transparent;
   border: none;
-  line-height: normal;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
-  font-size: 17px;
   cursor: default;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -3479,11 +3186,9 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   text-decoration: none;
   letter-spacing: 0;
   vertical-align: middle;
-  border: none;
   border-top: 1px solid #ddd;
   font-size: 16px;
   padding: 0 8px;
-  margin: 0;
   display: block;
   width: 100%;
   background-color: transparent;
@@ -3570,7 +3275,6 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   margin: 0;
   font: inherit;
   color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
   cursor: default;
@@ -3921,20 +3625,13 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   margin: 0;
   font: inherit;
   color: inherit;
-  background: transparent;
   border: none;
   line-height: normal;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   font-size: 17px;
-  overflow: hidden;
   background-color: rgba(0,0,0,0.7);
   position: absolute;
   left: 0;
@@ -3952,21 +3649,14 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   box-sizing: border-box;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
-  white-space: nowrap;
   overflow: hidden;
   word-spacing: 0;
   padding: 0;
   margin: 0;
   font: inherit;
-  color: inherit;
   background: transparent;
   border: none;
   line-height: normal;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
