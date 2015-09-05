@@ -1,10 +1,17 @@
 function gotoStart() {
+    $('#screenTabs').removeClass('ng-hide').removeAttr('ng-hide');
     var tabBar = $('#screenTabs')
         .removeClass('screen__tabs-hidden')
         .find('.tab-bar');
-    tabBar.fadeIn();
+    tabBar
+        .removeClass('ng-hide')
+        .fadeIn();
 
-    screenTabs.setActiveTab(2);
+    screenTabs.setActiveTab(1);
+}
+
+function screenNaPushPage(id) {
+    screenNav.pushPage(id, { animation: "slide" });
 }
 
 $(function () {

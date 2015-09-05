@@ -50,184 +50,185 @@
     </head>
 
     <body>
+    <ons-navigator id="screenNav" var="screenNav" ng-controller="mainCtrl">
+        <ons-page>
+            <div class="welcome-page">
+                <div class="logo-block">
+                    <img src="images/logo@2x.png" alt="logo">
+                </div>
+            </div>
+        </ons-page>
+    </ons-navigator>
     <ons-tabbar
         class="screen__tabs"
         id="screenTabs"
         var="screenTabs"
-        hide-tabs="true"
-        animation="fade" >
-        <ons-tab page="startup.html" active="true" class="screen__tabs-login" ng-hide="true">
-            <ons-icon
-                icon="ion-locked">
-            </ons-icon>
-        </ons-tab>
-        <ons-tab page="profile.html">
+        ng-hide="true"
+        animation="slide" >
+        <ons-tab page="profile-empty.html">
             <ons-icon
                 icon="ion-home">
             </ons-icon>
         </ons-tab>
-        <ons-tab page="profile.html">
+        <ons-tab page="profile-empty.html">
             <ons-icon
                 icon="ion-plus-round">
             </ons-icon>
         </ons-tab>
-        <ons-tab page="profile.html">
+        <ons-tab page="profile-empty.html">
             <ons-icon
                 icon="ion-person">
             </ons-icon>
         </ons-tab>
-        <ons-tab page="profile.html">
+        <ons-tab page="profile-empty.html">
             <ons-icon
                 icon="ion-gear-a">
             </ons-icon>
         </ons-tab>
     </ons-tabbar>
+    
+    <ons-template id="startup.html">
+        <ons-page>
+            <div class="register-login-page" ng-controller="RegisterLoginFormCtrl">
+                <div class="logo-block">
+                    <img src="images/logo@2x.png" alt="logo">
+                </div>
+                <div class="register-login-form">
+                    <form 
+                        name="registerLoginForm"
+                        id="registerLoginForm"
+                        method="post">
+                        <div class="form-control-holder">
+                            <input 
+                                type="email"
+                                name="email"
+                                ng-model="email"
+                                placeholder="Email"
+                                class="text-input form-control"
+                                value=""
+                                required="true" />
+                            <div class="error" ng-show="registerLoginForm.email.$invalid && registerLoginForm.email.$dirty">
+                                <span ng-show="registerLoginForm.email.$error.email">
+                                    Введите праивльный email
+                                </span>
+                                <span ng-show="registerLoginForm.email.$error.required">
+                                    Поле не должно быть пустым
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-control-holder">
+                            <input
+                                type="password"
+                                name="password"
+                                ng-model="password"
+                                ng-minlength="3"
+                                placeholder="Пароль"
+                                class="text-input form-control"
+                                value=""
+                                required="true" />
+                            <div class="error" ng-show="registerLoginForm.password.$invalid && registerLoginForm.password.$dirty">
+                                <span ng-show="registerLoginForm.password.$error.required">
+                                    Поле не должно быть пустым
+                                </span>
+                                <span ng-show="registerLoginForm.password.$error.minlength">
+                                    Поле должно содержать более 3-х символов
+                                </span>
+                            </div>
+                            </div>
+                        <ons-button
+                            ng-disabled="registerLoginForm.$invalid"
+                            ng-click="register()"
+                            class="signup-button button--large">
+                            Регистрация
+                        </ons-button>
+                        <ons-button
+                            ng-disabled="registerLoginForm.$invalid"
+                            ng-click="login()"
+                            class="login-button button--large button--light">
+                            Вход
+                        </ons-button>
+                    </form>
+                </div>
+            </div>
+        </ons-page>
+    </ons-template>
 
-    <script type="text/ons-template" id="startup.html">
-        <ons-navigator id="screenNav" var="nav">
-            <ons-page>
-                <div class="register-login-page" ng-controller="RegisterLoginFormCtrl">
-                    <div class="logo-block">
-                        <img src="images/logo@2x.png" alt="logo">
+    <ons-template id="profile-empty.html">
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">Вася</div>
+            </ons-toolbar>
+
+            <div class="hero">
+                <div class="profile-card">
+                    <div class="profile-level">
+                        <div class="circle">
+                            <div class="value">213</div>
+                            <div class="label">ур.</div>
+                        </div>
                     </div>
-                    <div class="register-login-form">
-                        <form 
-                            name="registerLoginForm"
-                            id="registerLoginForm"
-                            method="post">
-                            <div class="form-control-holder">
-                                <input 
-                                    type="email"
-                                    name="email"
-                                    ng-model="email"
-                                    placeholder="Email"
-                                    class="text-input form-control"
-                                    value=""
-                                    required="true" />
-                                <div class="error" ng-show="registerLoginForm.email.$invalid && registerLoginForm.email.$dirty">
-                                    <span ng-show="registerLoginForm.email.$error.email">
-                                        Введите праивльный email
-                                    </span>
-                                    <span ng-show="registerLoginForm.email.$error.required">
-                                        Поле не должно быть пустым
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="form-control-holder">
-                                <input
-                                    type="password"
-                                    name="password"
-                                    ng-model="password"
-                                    ng-minlength="3"
-                                    placeholder="Пароль"
-                                    class="text-input form-control"
-                                    value=""
-                                    required="true" />
-                                <div class="error" ng-show="registerLoginForm.password.$invalid && registerLoginForm.password.$dirty">
-                                    <span ng-show="registerLoginForm.password.$error.required">
-                                        Поле не должно быть пустым
-                                    </span>
-                                    <span ng-show="registerLoginForm.password.$error.minlength">
-                                        Поле должно содержать более 3-х символов
-                                    </span>
-                                </div>
-                            </div>
-                            <ons-button
-                                ng-disabled="registerLoginForm.$invalid"
-                                ng-click="register()"
-                                class="signup-button button--large">
-                                Регистрация
-                            </ons-button>
-                            <ons-button
-                                ng-disabled="registerLoginForm.$invalid"
-                                ng-click="login()"
-                                class="login-button button--large button--light">
-                                Вход
-                            </ons-button>
-                        </form>
+
+                    <div class="profile-photo">
+                        <div class="user-photo">
+                            <img src="images/user-photo-large.jpg" alt="" width="85" height="85">
+                        </div>
+                    </div>
+
+                    <div class="profile-actions">
+                        <ons-button class="follow">
+                            <i class="icon user"></i>
+                            <i class="icon add"></i>
+                        </ons-button>
                     </div>
                 </div>
-            </ons-page>
-        </ons-navigator>
-    </script>
-    <script type="text/ons-template" id="profile.html">
-        <ons-navigator>
-            <ons-page>
-                <ons-toolbar>
-                    <div class="center">Вася</div>
-                </ons-toolbar>
+            </div>
 
-                <div class="hero">
-                    <div class="profile-card">
-                        <div class="profile-level">
-                            <div class="circle">
-                                <div class="value">213</div>
-                                <div class="label">ур.</div>
-                            </div>
-                        </div>
+            <ons-list class="">
+                <ons-list-item modifier="chevron">
+                    Подписчики <span class="number">53</span>
+                </ons-list-item>
 
-                        <div class="profile-photo">
-                            <div class="user-photo">
-                                <img src="images/user-photo-large.jpg" alt="" width="85" height="85">
-                            </div>
-                        </div>
+                <ons-list-item modifier="chevron">
+                    Подписки <span class="number">41</span>
+                </ons-list-item>
+            </ons-list>
 
-                        <div class="profile-actions">
-                            <ons-button class="follow">
-                                <i class="icon user"></i>
-                                <i class="icon add"></i>
-                            </ons-button>
-                        </div>
-                    </div>
-                </div>
+            <div class="divider"></div>
 
-                <ons-list class="">
-                    <ons-list-item modifier="chevron">
-                        Подписчики <span class="number">53</span>
-                    </ons-list-item>
+            <ons-list class="goals-list">
+                <ons-list-item class="header">
+                    <strong>Цели</strong><span class="number">4</span>
+                </ons-list-item>
 
-                    <ons-list-item modifier="chevron">
-                        Подписки <span class="number">41</span>
-                    </ons-list-item>
-                </ons-list>
+                <ons-list-item modifier="chevron">
+                    <ons-row>
+                        <ons-col>
+                            <div class="title">Почистить зубы</div>
+                            <div class="status green"><i class="icon fav green"></i>1 000 Р<i class="icon fav green"></i>Достигнуто</div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
 
-                <div class="divider"></div>
+                <ons-list-item modifier="chevron">
+                    <ons-row>
+                        <ons-col>
+                            <div class="title">Сделать зарядку</div>
+                            <div class="status gray"><i class="icon fav gray"></i>1 100 Р<i class="icon fav gray"></i>Провалено</div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
 
-                <ons-list class="goals-list">
-                    <ons-list-item class="header">
-                        <strong>Цели</strong><span class="number">4</span>
-                    </ons-list-item>
-
-                    <ons-list-item modifier="chevron">
-                        <ons-row>
-                            <ons-col>
-                                <div class="title">Почистить зубы</div>
-                                <div class="status green"><i class="icon fav green"></i>1 000 Р<i class="icon fav green"></i>Достигнуто</div>
-                            </ons-col>
-                        </ons-row>
-                    </ons-list-item>
-
-                    <ons-list-item modifier="chevron">
-                        <ons-row>
-                            <ons-col>
-                                <div class="title">Сделать зарядку</div>
-                                <div class="status gray"><i class="icon fav gray"></i>1 100 Р<i class="icon fav gray"></i>Провалено</div>
-                            </ons-col>
-                        </ons-row>
-                    </ons-list-item>
-
-                    <ons-list-item modifier="chevron">
-                        <ons-row>
-                            <ons-col>
-                                <div class="title">Позавтракать</div>
-                                <div class="status blue"><i class="icon fav blue"></i>1 000 Р<i class="icon fav blue"></i>7 дней</div>
-                            </ons-col>
-                        </ons-row>
-                    </ons-list-item>
-                </ons-list>
-            </ons-page>
-        </ons-navigator>
-    </script>
+                <ons-list-item modifier="chevron">
+                    <ons-row>
+                        <ons-col>
+                            <div class="title">Позавтракать</div>
+                            <div class="status blue"><i class="icon fav blue"></i>1 000 Р<i class="icon fav blue"></i>7 дней</div>
+                        </ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+        </ons-page>
+    </ons-template>
     <script src="js/script.js"></script>
 </body>  
 </html>

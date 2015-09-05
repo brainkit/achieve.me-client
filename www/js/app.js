@@ -14,7 +14,7 @@
     var Onsen = angular.module('achieveMeApp',
                 [   'onsen.directives',     //модуль для работы с UI
                     'angularFileUpload',    //модуль для работы с файлами
-                    'ngRoute',              // module provides routing and deeplinking services and directives for angular apps
+                    'ngRoute',              //module provides routing and deeplinking services and directives for angular apps
                     'ngTouch',              //module provides touch events and other helpers for touch-enabled devices
                     'ngResource',           //module provides interaction support with RESTful services
                     'LocalStorageModule',   //module that gives you access to the browsers local storage
@@ -74,6 +74,21 @@
                 });
 
     /*
+     * задаем контроллер для навигатора
+     * для модуля Onsen
+     * область действия $scope ons-navigator
+     */
+    Onsen.controller('mainCtrl', function ($scope, $http) {
+        if(hash != null){
+            ons.ready(function (){
+                gotoStart();
+            });
+        }else{
+            screenNaPushPage('startup.html');
+        }
+    })
+
+    /*
      * задаем контроллер для представления startup.html
      * для модуля Onsen
      * область действия $scope body
@@ -81,11 +96,7 @@
     Onsen.controller('RegisterLoginFormCtrl', function ($scope, $http) {
         //$scope.greeting = "Good Night!";
         //$scope.startText = "Пара слов о том, что за приложение. Коротко, ясно, просто. И слоган :)";
-        if(hash != null){
-            ons.ready(function (){
-                gotoStart();
-            });
-        }
+        
         $scope.register = function () {
             var url = serverName + "/api/user";
             //?hash=
