@@ -1,3 +1,6 @@
+body
+{background: #fff url('../images/logo@2x.png') no-repeat 50% 50%;}
+
 /*
  *	Welcome page
  */
@@ -219,31 +222,20 @@ form .ng-valid.ng-dirty
 
 /*
  *	Profile settings page
- *
  */
 
-.change-profile-photo {
-	padding: 20px 0 25px;
-	border-bottom: 1px solid #dee1e5;
-	text-align: center;
-}
-
-.change-profile-photo img {
-	border: 2px solid #13a2fe;
-	-webkit-border-radius: 47px;
-	-moz-border-radius: 47px;
-	border-radius: 47px;
-	overflow: hidden;
-}
-
-.change-profile-photo .image-label {
-	color: #bec4cd;
-	margin-top: 5px;
-}
-
-.change-profile-photo ons-button {
-	margin-top: 14px;
-}
+.change-profile-photo
+{padding: 20px 0 25px; border-bottom: 1px solid #dee1e5; text-align: center;}
+    .change-profile-photo img
+    {width: 85px; height: 85px; overflow: hidden; border: 2px solid #13a2fe;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
+    .change-profile-photo .image-label
+    {color: #bec4cd; margin-top: 5px;}
+    .change-profile-photo ons-button
+    {margin-top: 14px;}
 
 .profile-settings-form .text-input {
 	width: 100%;

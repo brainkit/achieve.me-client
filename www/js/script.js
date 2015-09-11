@@ -1,4 +1,4 @@
-function gotoStart() {
+/*function gotoStart() {
     $('#screenTabs').removeClass('ng-hide').removeAttr('ng-hide');
     var tabBar = $('#screenTabs')
         .removeClass('screen__tabs-hidden')
@@ -9,11 +9,14 @@ function gotoStart() {
 
     screenTabs.setActiveTab(0);
 }
-
-function screenNaPushPage(id) {
-    screenNav.pushPage(id, { animation: "slide" });
+*/
+/*
+ * функция смены страницы
+ */
+/*function screenNavPushPage (id, animation) {
+    if(typeof animation == "undefined" && !animation){
+        animation = "slide";
+    }
+    screenNav.pushPage(id, { animation: animation});
 }
-
-$(function () {
-    FastClick.attach(document.body);
-});
+*/

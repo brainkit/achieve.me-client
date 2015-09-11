@@ -1,0 +1,64 @@
+<!-- Шаблон страницы входа/регистрации -->
+<ons-page>
+	<div class="register-login-page" ng-controller="RegisterLoginFormCtrl">
+		<div class="logo-block">
+			<img src="images/logo@2x.png" alt="logo">
+		</div>
+		<div class="register-login-form">
+			<form 
+				name="registerLoginForm"
+				id="registerLoginForm"
+				method="post">
+				<div class="form-control-holder">
+					<input 
+						type="email"
+						name="email"
+						ng-model="email"
+						placeholder="Email"
+						class="text-input form-control"
+						value=""
+						required="true" />
+					<div class="error" ng-show="registerLoginForm.email.$invalid && registerLoginForm.email.$dirty">
+						<span ng-show="registerLoginForm.email.$error.email">
+							Введите праивльный email
+						</span>
+						<span ng-show="registerLoginForm.email.$error.required">
+							Поле не должно быть пустым
+						</span>
+					</div>
+				</div>
+				<div class="form-control-holder">
+					<input
+						type="password"
+						name="password"
+						ng-model="password"
+						ng-minlength="3"
+						placeholder="Пароль"
+						class="text-input form-control"
+						value=""
+						required="true" />
+					<div class="error" ng-show="registerLoginForm.password.$invalid && registerLoginForm.password.$dirty">
+						<span ng-show="registerLoginForm.password.$error.required">
+							Поле не должно быть пустым
+						</span>
+						<span ng-show="registerLoginForm.password.$error.minlength">
+							Поле должно содержать более 3-х символов
+						</span>
+					</div>
+				</div>
+				<ons-button
+					ng-disabled="registerLoginForm.$invalid"
+					ng-click="register()"
+					class="signup-button button--large">
+					Регистрация
+				</ons-button>
+				<ons-button
+					ng-disabled="registerLoginForm.$invalid"
+					ng-click="login()"
+					class="login-button button--large button--light">
+					Вход
+				</ons-button>
+			</form>
+		</div>
+	</div>
+</ons-page>
