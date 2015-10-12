@@ -1,5 +1,5 @@
 <!-- Шаблон настройки профиля пользователя -->
-<div class="profile-settings-page" ng-controller="EditProfileCtrl" ng-cloak>
+<div class="profile-settings-page" ng-controller="EditProfileCtrl">
 	<ons-toolbar>
 		<div class="left">
 			<ons-back-button>&nbsp;</ons-back-button>
@@ -7,9 +7,10 @@
 		<div class="center">Настройки профиля</div>
 	</ons-toolbar>
 	<div class="change-profile-photo">
-		<img ng-src="{{userPhoto}}" alt="{{userPhotoLabel}}" />
-		<div class="image-label">{{userPhotoLabel}}</div>
-			<ons-button class="button--outline">Изменить аватар</ons-button>
+		<img ng-src="{{$root.userPhoto}}" alt="{{$root.userName}}" />
+		<!--<div class="image-label">{{userPhotoLabel}}</div>-->
+                <div class="image-label"></div>
+		<ons-button class="button--outline">Изменить аватар</ons-button>
 	</div>
 	<div class="subtitle inner">Изменить имя</div>
 	<div class="inner profile-settings-form">
@@ -17,7 +18,7 @@
 			name="profileSettingsForm"
 			id="profileSettingsForm"
 			method="post">
-			<input ng-keyup="changeName()" type="text" class="text-input" placeholder="Ваше имя" ng-model="userName" value="{{userName}}" />
+			<input ng-keyup="changeName()" type="text" class="text-input" placeholder="Ваше имя" ng-model="$root.userName" value="{{$root.userName}}" />
 			<!--
 			<ons-button
 				ng-disabled="profileSettingsForm.$invalid"

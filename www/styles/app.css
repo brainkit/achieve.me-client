@@ -237,9 +237,12 @@ form .ng-valid.ng-dirty
     .change-profile-photo ons-button
     {margin-top: 14px;}
 
+.profile-settings-form {
+    margin-bottom: 15px;
+} 
 .profile-settings-form .text-input {
-	width: 100%;
-	background: #ffffff;
+    width: 100%;
+    background: #fff;
 }
 
 

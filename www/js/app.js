@@ -81,25 +81,6 @@
 
         //$scope.animation = 'slide';
         $rootScope.hideTabs = true;
-        
-        /*
-         * Метод листания стрниц (есть возможность навигации)
-         */
-        $scope.screenNavPushPage = function (id, animation) {
-            if(typeof animation == "undefined" && !animation){
-                animation = 'fade';
-            }
-            $('#screenTabs').attr('animation', animation);
-            screenNav.pushPage(id, { animation: animation});
-            //screenTabs.loadPage(id);
-        }
-        
-        /*
-         * Метод подгрузки стрницы
-         */
-        $scope.tabbarLoadPage = function (id) {
-            screenTabs.loadPage(id);
-        }
 
         $scope.alertDialog = function(title, message) {
             ons.notification.alert({'title': title, 'message': message});
@@ -110,9 +91,9 @@
          */
         $scope.getUserProfileSettings = function(push) {
             if(push){
-                $scope.screenNavPushPage('profile-settings.html', 'slide');
+                $rootScope.screenNavPushPage('profile-settings.html', 'slide');
             }else{
-                $scope.tabbarLoadPage('profile-settings.html');
+                $rootScope.tabbarLoadPage('profile-settings.html');
             }
         }
         
@@ -121,6 +102,8 @@
          */
         $scope.hideTabBar = function() {
             $rootScope.hideTabs = true;
+            $('.navigation-bar__left').css({'visibility':'hidden'});
+            $('.navigation-bar__right').css({'visibility':'hidden'});
         }
         
         /*
@@ -128,6 +111,8 @@
          */
         $scope.showTabBar = function() {
             $rootScope.hideTabs = false;
+            $('.navigation-bar__left').css({'visibility':'visible'});
+            $('.navigation-bar__right').css({'visibility':'visible'});
         }
         
         /*
@@ -138,6 +123,11 @@
             $scope.alertDialog('Внимание!','Перед началом использования приложения Вам необходимо ввести свое имя и при возможности добавить аватар для узнаваемости');
         }
         
+        $rootScope.userName = '';
+        //для тулбара нужно перейти в родительский скопе
+        //$scope.$parent.userName = $scope.userName;
+        $rootScope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
+        
         $scope.goToHomePage = function() {
             /*$('#screenTabs').removeClass('ng-hide').removeAttr('ng-hide');
             var tabBar = $('#screenTabs')
@@ -147,27 +137,17 @@
                 .removeClass('ng-hide')
                 .fadeIn();
 */
-            $scope.showTabBar();
-            screenTabs.setActiveTab(0);
-        }
-        
-        
-        $scope.userName = '';
-        //для тулбара нужно перейти в родительский скопе
-        //$scope.$parent.userName = $scope.userName;
-        $scope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
-        
-        ons.ready(function (){
-            FastClick.attach(document.body);
             if(hash){
                 var url = serverName + "api/user-settings?hash=" + hash;
                 $http.get(url).success(function (data){
                     //console.log('data.name '+data.name);
                     if(data.name != ''){
-                        $scope.userName = data.name;
+                        $rootScope.userName = data.name;
                         //$scope.$parent.userName = $scope.userName;
                         //$scope.showTabBar();
-                        $scope.goToHomePage();
+                        $scope.showTabBar();
+                        $rootScope.tabbarLoadPage('tab1.html');
+                        screenTabs.setActiveTab(0);
                     }else{
                         $scope.noUserName();
                         $scope.getUserProfileSettings(false);
@@ -179,9 +159,56 @@
                     //alert("error!");
                 });
             }else{
-                $scope.tabbarLoadPage('startup.html');
+                $rootScope.tabbarLoadPage('startup.html');
             }
-        }); 
+        }
+        
+        ons.ready(function (){
+            FastClick.attach(document.body);
+            $scope.goToHomePage();
+        });
+        
+        
+        
+        $scope.changeName = function(){
+            if($rootScope.userName != ''){
+                $scope.showTabBar();
+            }else{
+                $scope.noUserName();
+            }
+            var url = serverName + "api/user-settings/update";
+            $http.post(url, {hash: hash, name: $rootScope.userName}).success(function (){
+                // console.log(data);
+            }).error(function(){
+                // alert("Логин или пароль введен неверно!");
+            });
+        };
+
+        $scope.changePhoto = function($files){
+            var url = serverName + "api/user-settings/update";
+            var file = $files[0];
+            $scope.upload = $upload.upload({
+                url: url, //upload.php script, node.js route, or servlet url
+                method: 'POST',
+                //headers: {'header-key': 'header-value'},
+                //withCredentials: true,
+                data: {myObj: $scope.uploadPhoto, hash: hash},
+                file: file, // or list of files ($files) for html5 only
+                //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
+                // customize file formData name ('Content-Disposition'), server side file variable name. 
+                fileFormDataName: "photo", //or a list of names for multiple files (html5). Default is 'file' 
+                // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
+                //formDataAppender: function(formData, key, val){}
+            }).progress(function (evt){
+                //console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                var percent = parseInt(100.0 * evt.loaded / evt.total);
+                $scope.uploadStatus = "Загрузка: " + percent + "%";
+            }).success(function (data, status, headers, config) {
+                $scope.uploadStatus = "Аватар загружен!";
+            });
+        };
+        
+        
     })
     
     /*
@@ -189,8 +216,18 @@
      * для модуля Onsen
      * область действия $scope ons-navigator
      */
-    Onsen.controller('NavCtrl', function ($scope) {
-        
+    Onsen.controller('NavCtrl', function ($scope, $rootScope) {
+        /*
+         * Метод листания стрниц (есть возможность навигации)
+         */
+        $rootScope.screenNavPushPage = function (id, animation) {
+            if(typeof animation == "undefined" && !animation){
+                animation = 'fade';
+            }
+            $('#screenTabs').attr('animation', animation);
+            screenNav.pushPage(id, { animation: animation});
+            //screenTabs.loadPage(id);
+        }
     })
     
     /*
@@ -199,43 +236,22 @@
      * область действия $scope ons-tabbar
      */
     Onsen.controller('TabBarCtrl', function ($scope, $rootScope) {
-        $scope.setTab1 = function () {
-            if(!alreadyPageLoad){
-                alreadyPageLoad = true;
-                $scope.tabbarLoadPage('tab1.html');
-            }else{
-                $scope.screenNavPushPage('profile.html', 'slide');
-            }
+        /*
+         * Метод подгрузки стрницы
+         */
+        $rootScope.tabbarLoadPage = function (id) {
+            screenTabs.loadPage(id);
         }
-        $scope.setTab2 = function () {
-            if(!alreadyPageLoad){
-                alreadyPageLoad = true;
-                $scope.tabbarLoadPage('tab2.html');
-            }else{
-                $scope.screenNavPushPage('profile-empty.html', 'slide');
-            }
-        }
-        $scope.setTab3 = function () {
-            if(!alreadyPageLoad){
-                alreadyPageLoad = true;
-                $scope.tabbarLoadPage('tab3.html');
-            }else{
-                $scope.screenNavPushPage('profile.html', 'slide');
-            }
-        }
-        $scope.setTab4 = function () {
-            if(!alreadyPageLoad){
-                alreadyPageLoad = true;
-                $scope.tabbarLoadPage('tab4.html');
-            }else{
-                $scope.screenNavPushPage('profile.html', 'slide');
-            } 
+        
+        $scope.setActiveTab = function (page, tabId) {
+            $rootScope.tabbarLoadPage(page);
+            screenTabs.setActiveTab(tabId);
         }
         $scope.logoutProfile = function () {
             localStorage.removeItem('hash');
             hash = null;
             $rootScope.hideTabs = true;
-            $scope.tabbarLoadPage('startup.html');
+            $rootScope.tabbarLoadPage('startup.html');
         }
     })
 
@@ -244,12 +260,12 @@
      * для модуля Onsen
      * область действия $scope .register-login-page
      */
-    Onsen.controller('RegisterLoginFormCtrl', function ($scope, $http) {
+    Onsen.controller('RegisterLoginFormCtrl', function ($scope, $rootScope, $http) {
         $scope.register = function () {
             var url = serverName + "api/user";
             //?hash=
             // console.log("jsonp->"); 
-            console.log(hash); 
+            //console.log(hash); 
             $http
                 .post(url, {hash: hashKey, email: $scope.email, password: $scope.password, deviceId: deviceId})
                 .success(function (data){
@@ -296,11 +312,11 @@
     });
     
     /*
-     * задаем контроллер для представления home.html
+     * задаем контроллер для представления profile.html
      * для модуля Onsen
      * область действия $scope .home-page
      */
-    Onsen.controller('HomeCtrl', function ($scope, $http) {
+    Onsen.controller('ProfileCtrl', function ($scope, $rootScope, $http) {
         
         $scope.userLevel = 1;
         $scope.userSubsCount = 0;
@@ -331,44 +347,7 @@
      * для модуля Onsen
      * область действия $scope .profile-settings-page
      */
-    Onsen.controller('EditProfileCtrl', function ($scope, $http, $upload) {
-
-        $scope.changeName = function(){
-            if($scope.userName != ''){
-                $scope.showTabBar();
-            }else{
-                $scope.noUserName();
-            }
-            var url = serverName + "api/user-settings/update";
-            $http.post(url, {hash: hash, name: $scope.userName}).success(function (){
-                // console.log(data);
-            }).error(function(){
-                // alert("Логин или пароль введен неверно!");
-            });
-        };
-
-        $scope.changePhoto = function($files){
-            var url = serverName + "api/user-settings/update";
-            var file = $files[0];
-            $scope.upload = $upload.upload({
-                url: url, //upload.php script, node.js route, or servlet url
-                method: 'POST',
-                //headers: {'header-key': 'header-value'},
-                //withCredentials: true,
-                data: {myObj: $scope.uploadPhoto, hash: hash},
-                file: file, // or list of files ($files) for html5 only
-                //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
-                // customize file formData name ('Content-Disposition'), server side file variable name. 
-                fileFormDataName: "photo", //or a list of names for multiple files (html5). Default is 'file' 
-                // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-                //formDataAppender: function(formData, key, val){}
-            }).progress(function (evt){
-                //console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                var percent = parseInt(100.0 * evt.loaded / evt.total);
-                $scope.uploadStatus = "Загрузка: " + percent + "%";
-            }).success(function (data, status, headers, config) {
-                $scope.uploadStatus = "Аватар загружен!";
-            });
-        };
+    Onsen.controller('EditProfileCtrl', function ($scope, $rootScope, $http, $upload) {
+ 
     });
 })();

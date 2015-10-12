@@ -1,7 +1,7 @@
 <!-- Шаблон профиля пользователя -->
-<div class="home-page" ng-controller="HomeCtrl" ng-cloak>
+<div class="home-page" ng-controller="ProfileCtrl">
 	<ons-toolbar>
-		<div class="center" ng-click="getUserProfileSettings(true)">{{userName}}</div>
+		<div class="center" ng-click="getUserProfileSettings(true)">{{$root.userName}}</div>
 	</ons-toolbar>
 
 	<div class="hero">
@@ -15,7 +15,7 @@
 
 			<div class="profile-photo" ng-click="getUserProfileSettings(true)">
 				<div class="user-photo">
-					<img ng-src="{{userPhoto}}" alt="{{userName}}">
+					<img ng-src="{{$root.userPhoto}}" alt="{{$root.userName}}">
 				</div>
 			</div>
 

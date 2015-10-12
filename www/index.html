@@ -54,32 +54,32 @@
         var="screenTabs"
         hide-tabs="{{$root.hideTabs}}"
         animation="fade" >
-        <ons-tab page="tab1.html">
+        <ons-tab ng-click="setActiveTab('tab1.html', 0)">
             <ons-icon
                 icon="ion-home">
             </ons-icon>
         </ons-tab>
-        <ons-tab page="tab2.html">
+        <ons-tab ng-click="setActiveTab('tab2.html', 1)">
             <ons-icon
                 icon="ion-plus-round">
             </ons-icon>
         </ons-tab>
-        <ons-tab page="tab3.html">
+        <ons-tab ng-click="setActiveTab('tab3.html', 2)">
             <ons-icon
                 icon="ion-person">
             </ons-icon>
         </ons-tab>
-        <ons-tab page="tab4.html">
+        <ons-tab ng-click="setActiveTab('tab4.html', 3)">
             <ons-icon
                 icon="ion-gear-a">
             </ons-icon>
         </ons-tab>
-        <ons-tab page="startup.html" ng-click="logoutProfile()">
+        <ons-tab ng-click="logoutProfile()">
             <ons-icon
                 icon="ion-power">
             </ons-icon>
         </ons-tab>
-    </ons-tabbar>    
+    </ons-tabbar>   
     <script src="js/script.js"></script>
 </body>  
 </html>
