@@ -1,0 +1,58 @@
+<!-- Шаблон профиля пользователя -->
+<div class="home-page" ng-controller="HomeCtrl" ng-cloak>
+	<ons-toolbar>
+		<div class="center" ng-click="getUserProfileSettings(true)">{{userName}}</div>
+	</ons-toolbar>
+
+	<div class="hero">
+		<div class="profile-card">
+			<div class="profile-level">
+				<div class="circle">
+					<div class="value">{{userLevel}}</div>
+					<div class="label">ур.</div>
+				</div>
+			</div>
+
+			<div class="profile-photo" ng-click="getUserProfileSettings(true)">
+				<div class="user-photo">
+					<img ng-src="{{userPhoto}}" alt="{{userName}}">
+				</div>
+			</div>
+
+			<div class="profile-actions">
+				<ons-button class="follow">
+					<i class="icon user"></i>
+					<i class="icon add"></i>
+				</ons-button>
+			</div>
+		</div>
+	</div>
+
+	<ons-list class="">
+		<ons-list-item modifier="chevron">
+			Подписчики <span class="number">{{userSubscriberCount}}</span>
+		</ons-list-item>
+		<ons-list-item modifier="chevron">
+			Подписки <span class="number">{{userSubsCount}}</span>
+		</ons-list-item>
+	</ons-list>
+
+	<div class="divider"></div>
+
+	<ons-list class="goals-list">
+		<ons-list-item class="header">
+			<strong>Цели</strong><span class="number">{{countAch}}</span>
+		</ons-list-item>
+		<ons-list-item modifier="chevron" ng-repeat="item in itemAch">
+			<ons-row>
+				<ons-col>
+					<div class="title" title="{{item.description}}">{{item.title}}</div>
+					<div class="status green"><i class="icon fav green"></i>1 000 Р<i class="icon fav green"></i>Достигнуто</div>
+				</ons-col>
+			</ons-row>
+		</ons-list-item>
+		<ons-list-item modifier="chevron" ng-click="">
+			<i class="icon ion-plus"></i> Добавить цель
+		</ons-list-item>
+	</ons-list>
+</div>

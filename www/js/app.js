@@ -1,12 +1,15 @@
+
+/********/
 (function () {
     'use strict';
     //
     var serverName = "http://pixelweb.tmweb.ru/";
-    var hashKey = "$2y$10$MPO7P1iQjxtHewmnOO.GK.XJcwvGI7cLDkKaACISc8yI.Sfi9np1O";
+    //var hashKey = "$2y$10$MPO7P1iQjxtHewmnOO.GK.XJcwvGI7cLDkKaACISc8yI.Sfi9np1O";
+    var hashKey = "$2y$10$WrSg4Qt2COjvnVhgMHTyAekZOtdUcnThxh3Yj2JO9BurcE36I3P0K";
     var deviceId = "6u3254165";
     var hash = localStorage.getItem('hash');
     //var achievements = localStorage.getItem('achievements');
-    
+    var alreadyPageLoad = false;
     /*
      * инициализируем модуль который используется на элементе html
      * inject в него необходимые дополнительные модули
@@ -75,30 +78,67 @@
      * область действия $scope body
      */
     Onsen.controller('BodyCtrl', function ($scope, $rootScope, $http) {
+
         //$scope.animation = 'slide';
         $rootScope.hideTabs = true;
         
+        /*
+         * Метод листания стрниц (есть возможность навигации)
+         */
         $scope.screenNavPushPage = function (id, animation) {
             if(typeof animation == "undefined" && !animation){
                 animation = 'fade';
             }
             $('#screenTabs').attr('animation', animation);
             screenNav.pushPage(id, { animation: animation});
+            //screenTabs.loadPage(id);
         }
         
+        /*
+         * Метод подгрузки стрницы
+         */
         $scope.tabbarLoadPage = function (id) {
-            screenTabs.loadPage(id)
+            screenTabs.loadPage(id);
         }
-        
+
         $scope.alertDialog = function(title, message) {
             ons.notification.alert({'title': title, 'message': message});
         }
         
-        $scope.getUserProfileSettings = function() {
-            $scope.tabbarLoadPage('profile-settings.html');
+        /*
+         * Метод отображения страницы настройки профиля
+         */
+        $scope.getUserProfileSettings = function(push) {
+            if(push){
+                $scope.screenNavPushPage('profile-settings.html', 'slide');
+            }else{
+                $scope.tabbarLoadPage('profile-settings.html');
+            }
         }
         
-        $scope.goToStart = function() {
+        /*
+         * Метод скрытия панели с кнопками
+         */
+        $scope.hideTabBar = function() {
+            $rootScope.hideTabs = true;
+        }
+        
+        /*
+         * Метод отображения панели с кнопками
+         */
+        $scope.showTabBar = function() {
+            $rootScope.hideTabs = false;
+        }
+        
+        /*
+         * Метод вызываемый, когда имя пользователя невведено (скрывает табы и выводит сообщение)
+         */
+        $scope.noUserName = function() {
+            $scope.hideTabBar();
+            $scope.alertDialog('Внимание!','Перед началом использования приложения Вам необходимо ввести свое имя и при возможности добавить аватар для узнаваемости');
+        }
+        
+        $scope.goToHomePage = function() {
             /*$('#screenTabs').removeClass('ng-hide').removeAttr('ng-hide');
             var tabBar = $('#screenTabs')
                 .removeClass('screen__tabs-hidden')
@@ -107,9 +147,41 @@
                 .removeClass('ng-hide')
                 .fadeIn();
 */
-            $rootScope.hideTabs = false;
+            $scope.showTabBar();
             screenTabs.setActiveTab(0);
         }
+        
+        
+        $scope.userName = '';
+        //для тулбара нужно перейти в родительский скопе
+        //$scope.$parent.userName = $scope.userName;
+        $scope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
+        
+        ons.ready(function (){
+            FastClick.attach(document.body);
+            if(hash){
+                var url = serverName + "api/user-settings?hash=" + hash;
+                $http.get(url).success(function (data){
+                    //console.log('data.name '+data.name);
+                    if(data.name != ''){
+                        $scope.userName = data.name;
+                        //$scope.$parent.userName = $scope.userName;
+                        //$scope.showTabBar();
+                        $scope.goToHomePage();
+                    }else{
+                        $scope.noUserName();
+                        $scope.getUserProfileSettings(false);
+                    }
+                    if((data.photo != '') && (data.photo != serverName)){
+                        $scope.userPhoto = data.photo;
+                    }
+                }).error(function () {
+                    //alert("error!");
+                });
+            }else{
+                $scope.tabbarLoadPage('startup.html');
+            }
+        }); 
     })
     
     /*
@@ -118,15 +190,6 @@
      * область действия $scope ons-navigator
      */
     Onsen.controller('NavCtrl', function ($scope) {
-        $scope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
-        ons.ready(function (){
-            FastClick.attach(document.body);
-            if(hash != null){
-                $scope.goToStart();
-            }else{
-                $scope.tabbarLoadPage('startup.html');
-            }
-        }); 
         
     })
     
@@ -136,8 +199,41 @@
      * область действия $scope ons-tabbar
      */
     Onsen.controller('TabBarCtrl', function ($scope, $rootScope) {
+        $scope.setTab1 = function () {
+            if(!alreadyPageLoad){
+                alreadyPageLoad = true;
+                $scope.tabbarLoadPage('tab1.html');
+            }else{
+                $scope.screenNavPushPage('profile.html', 'slide');
+            }
+        }
+        $scope.setTab2 = function () {
+            if(!alreadyPageLoad){
+                alreadyPageLoad = true;
+                $scope.tabbarLoadPage('tab2.html');
+            }else{
+                $scope.screenNavPushPage('profile-empty.html', 'slide');
+            }
+        }
+        $scope.setTab3 = function () {
+            if(!alreadyPageLoad){
+                alreadyPageLoad = true;
+                $scope.tabbarLoadPage('tab3.html');
+            }else{
+                $scope.screenNavPushPage('profile.html', 'slide');
+            }
+        }
+        $scope.setTab4 = function () {
+            if(!alreadyPageLoad){
+                alreadyPageLoad = true;
+                $scope.tabbarLoadPage('tab4.html');
+            }else{
+                $scope.screenNavPushPage('profile.html', 'slide');
+            } 
+        }
         $scope.logoutProfile = function () {
             localStorage.removeItem('hash');
+            hash = null;
             $rootScope.hideTabs = true;
             $scope.tabbarLoadPage('startup.html');
         }
@@ -153,14 +249,15 @@
             var url = serverName + "api/user";
             //?hash=
             // console.log("jsonp->"); 
+            console.log(hash); 
             $http
                 .post(url, {hash: hashKey, email: $scope.email, password: $scope.password, deviceId: deviceId})
                 .success(function (data){
                     if (data.hash){
                         hash = data.hash;
                         localStorage.setItem('hash', data.hash);
-                        $scope.alertDialog('Поздравляем!','Вы успешно зарегистрировались!');
-                        $scope.goToStart();
+                        $scope.alertDialog('Поздравляем! Вы успешно зарегистрировались!','Перед началом использования приложения Вам необходимо ввести свое имя и при возможности добавить аватар для узнаваемости');
+                        $scope.goToHomePage();
                     }
                 })
                 .error(function (data) {
@@ -188,7 +285,7 @@
                     if (data.hash){
                         hash = data.hash;
                         localStorage.setItem('hash', data.hash);
-                        $scope.goToStart();
+                        $scope.goToHomePage();
                     }
                     
                 })
@@ -204,27 +301,11 @@
      * область действия $scope .home-page
      */
     Onsen.controller('HomeCtrl', function ($scope, $http) {
-        var url = serverName + "api/user-settings?hash=" + hash;
-        $scope.userName = 'Новый пользователь';//заглушка аватарки по умолчанию
-        //для тулбара нужно перейти в родительский скопе
-        $scope.$parent.userName = $scope.userName;
-        $scope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
+        
         $scope.userLevel = 1;
         $scope.userSubsCount = 0;
         $scope.userSubscriberCount = 0;
         $scope.countAch = 0;
-        $http.get(url).success(function (data){
-            //console.log('data.name '+data.name);
-            if(data.name.trim() != ''){
-                $scope.userName = data.name;
-                $scope.$parent.userName = $scope.userName;
-            }
-            if(data.photo.trim() != ''){
-                $scope.userPhoto = data.photo;
-            }
-        }).error(function () {
-            //alert("error!");
-        });
 
         var url = serverName + "api/user-achievements?hash=" + hash;
         $http.get(url).success(function (data){
@@ -251,18 +332,13 @@
      * область действия $scope .profile-settings-page
      */
     Onsen.controller('EditProfileCtrl', function ($scope, $http, $upload) {
-        var url = serverName + "api/user-settings?hash=" + hash;
-        $scope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
-        
-        $http.get(url).success(function (data){
-            $scope.userName = data.name;
-            $scope.userPhoto = serverName + data.photo;
-        }).error(function () {
-            // alert("Логин или пароль введен неверно!");
-            //alert("error!");
-        });
 
         $scope.changeName = function(){
+            if($scope.userName != ''){
+                $scope.showTabBar();
+            }else{
+                $scope.noUserName();
+            }
             var url = serverName + "api/user-settings/update";
             $http.post(url, {hash: hash, name: $scope.userName}).success(function (){
                 // console.log(data);
