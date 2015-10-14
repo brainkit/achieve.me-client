@@ -3,7 +3,7 @@
 (function () {
     'use strict';
     //
-    var serverName = "http://pixelweb.tmweb.ru/";
+    var serverName = "http://pixelweb.tmweb.ru";
     //var hashKey = "$2y$10$MPO7P1iQjxtHewmnOO.GK.XJcwvGI7cLDkKaACISc8yI.Sfi9np1O";
     var hashKey = "$2y$10$WrSg4Qt2COjvnVhgMHTyAekZOtdUcnThxh3Yj2JO9BurcE36I3P0K";
     var deviceId = "6u3254165";
@@ -16,7 +16,8 @@
      */
     var Onsen = angular.module('achieveMeApp',
                 [   'onsen.directives',     //модуль для работы с UI
-                    'angularFileUpload',    //модуль для работы с файлами
+                    //'angularFileUpload',    //модуль для работы с файлами
+                    'ngFileUpload',    //модуль для работы с файлами
                     'ngRoute',              //module provides routing and deeplinking services and directives for angular apps
                     'ngTouch',              //module provides touch events and other helpers for touch-enabled devices
                     'ngResource',           //module provides interaction support with RESTful services
@@ -126,7 +127,8 @@
         $rootScope.userName = '';
         //для тулбара нужно перейти в родительский скопе
         //$scope.$parent.userName = $scope.userName;
-        $rootScope.userPhoto = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
+        $rootScope.userPhotoDefault = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
+        $rootScope.userPhoto = $rootScope.userPhotoDefault;
         
         $scope.goToHomePage = function() {
             /*$('#screenTabs').removeClass('ng-hide').removeAttr('ng-hide');
@@ -138,7 +140,7 @@
                 .fadeIn();
 */
             if(hash){
-                var url = serverName + "api/user-settings?hash=" + hash;
+                var url = serverName + "/api/user-settings?hash=" + hash;
                 $http.get(url).success(function (data){
                     //console.log('data.name '+data.name);
                     if(data.name != ''){
@@ -152,8 +154,8 @@
                         $scope.noUserName();
                         $scope.getUserProfileSettings(false);
                     }
-                    if((data.photo != '') && (data.photo != serverName)){
-                        $scope.userPhoto = data.photo;
+                    if((data.photo != '') && (data.photo != (serverName+'/'))){
+                        $rootScope.userPhoto = serverName + data.photo;
                     }
                 }).error(function () {
                     //alert("error!");
@@ -167,48 +169,7 @@
             FastClick.attach(document.body);
             $scope.goToHomePage();
         });
-        
-        
-        
-        $scope.changeName = function(){
-            if($rootScope.userName != ''){
-                $scope.showTabBar();
-            }else{
-                $scope.noUserName();
-            }
-            var url = serverName + "api/user-settings/update";
-            $http.post(url, {hash: hash, name: $rootScope.userName}).success(function (){
-                // console.log(data);
-            }).error(function(){
-                // alert("Логин или пароль введен неверно!");
-            });
-        };
-
-        $scope.changePhoto = function($files){
-            var url = serverName + "api/user-settings/update";
-            var file = $files[0];
-            $scope.upload = $upload.upload({
-                url: url, //upload.php script, node.js route, or servlet url
-                method: 'POST',
-                //headers: {'header-key': 'header-value'},
-                //withCredentials: true,
-                data: {myObj: $scope.uploadPhoto, hash: hash},
-                file: file, // or list of files ($files) for html5 only
-                //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
-                // customize file formData name ('Content-Disposition'), server side file variable name. 
-                fileFormDataName: "photo", //or a list of names for multiple files (html5). Default is 'file' 
-                // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-                //formDataAppender: function(formData, key, val){}
-            }).progress(function (evt){
-                //console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                var percent = parseInt(100.0 * evt.loaded / evt.total);
-                $scope.uploadStatus = "Загрузка: " + percent + "%";
-            }).success(function (data, status, headers, config) {
-                $scope.uploadStatus = "Аватар загружен!";
-            });
-        };
-        
-        
+ 
     })
     
     /*
@@ -262,7 +223,7 @@
      */
     Onsen.controller('RegisterLoginFormCtrl', function ($scope, $rootScope, $http) {
         $scope.register = function () {
-            var url = serverName + "api/user";
+            var url = serverName + "/api/user";
             //?hash=
             // console.log("jsonp->"); 
             //console.log(hash); 
@@ -281,7 +242,7 @@
                 });
         }
         $scope.login = function () {
-            var url = serverName + "auth";
+            var url = serverName + "/auth";
             $http
                 .post(url, {email: $scope.email, password: $scope.password})
                 .success(function (data){
@@ -323,7 +284,7 @@
         $scope.userSubscriberCount = 0;
         $scope.countAch = 0;
 
-        var url = serverName + "api/user-achievements?hash=" + hash;
+        var url = serverName + "/api/user-achievements?hash=" + hash;
         $http.get(url).success(function (data){
             $scope.itemAch = data.data;
             $scope.itemAch = [
@@ -334,7 +295,7 @@
             //alert("error!");
         });
 
-        var url = serverName + "api/user-achievements-count?hash=" + hash;
+        var url = serverName + "/api/user-achievements-count?hash=" + hash;
         $http.get(url).success(function (data){
             $scope.countAch = parseInt(data);
         }).error(function () {
@@ -347,7 +308,64 @@
      * для модуля Onsen
      * область действия $scope .profile-settings-page
      */
-    Onsen.controller('EditProfileCtrl', function ($scope, $rootScope, $http, $upload) {
- 
+    Onsen.controller('EditProfileCtrl', function ($scope, $rootScope, $timeout, $http, Upload) {
+        $scope.showUploadStatus = false;
+   
+        $scope.changeName = function(){
+            $scope.showUploadStatus = false;
+            if($rootScope.userName != ''){
+                $scope.showTabBar();
+            }else{
+                $scope.noUserName();
+            }
+            var url = serverName + "/api/user-settings/update";
+            $http.post(url, {hash: hash, name: $rootScope.userName}).success(function (data){
+                $rootScope.userName = data.name;
+            }).error(function(){
+                // alert("Логин или пароль введен неверно!");
+            });
+        };
+        
+        $scope.uploadAvatar = function (file) {
+            $scope.showUploadStatus = true;
+            if (file != null) {
+                var url = serverName + "/api/user-settings/update";
+                $scope.uploadStatusClass = "upload";
+                file.upload = Upload.upload({
+                    url: url,
+                    resumeSizeUrl: null,
+                    resumeChunkSize: null,
+                    headers: {
+                        'optional-header': 'header-value'
+                    },
+                    data: {hash: hash, photo: file}
+                });
+                file.upload.progress(function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                    $scope.uploadStatus = "Загрузка: " + file.progress + "%";
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data.photo;
+                        $scope.uploadStatus = "Аватар загружен!";
+                        $scope.uploadStatusClass = "right";
+                        $rootScope.userPhoto = serverName + file.result+'?'+Date.now();
+                    });
+                }, function (response) {
+                    if (response.error){
+                        $scope.uploadStatus = 'Ошибка загрузки аватара!';
+                        $scope.uploadStatusClass = "error";
+                    }
+                });
+
+                file.upload.xhr(function (xhr) {
+                    // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+                });
+            }else{
+                $scope.uploadStatus = 'Вы не выбрали новый аватар!';
+                $scope.uploadStatusClass = "error";
+            }
+        };
     });
 })();

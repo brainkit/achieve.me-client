@@ -202,7 +202,7 @@ form .ng-valid.ng-dirty
 }
 
 .profile-card .profile-photo img {
-	max-width: 85px;
+	width: 85px;
 	height: 85px;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
@@ -232,20 +232,45 @@ form .ng-valid.ng-dirty
         -moz-border-radius: 50%;
         border-radius: 50%;
     }
-    .change-profile-photo .image-label
-    {color: #bec4cd; margin-top: 5px;}
-    .change-profile-photo ons-button
-    {margin-top: 14px;}
-
-.profile-settings-form {
+    /*.change-profile-photo .image-label
+    {color: #bec4cd; margin-top: 5px;}*/
+    .fileUploadHolder
+    {margin: 0 auto; overflow: hidden;}
+    .avatarUploadHolder
+    {width: 164px; height: 34px; margin-top: 15px;}
+        .fileUploadHolder input
+        {position: absolute; z-index: 2; opacity: 0;}
+        .avatarUploadHolder input
+        {height: 34px;}
+        .fileUploadHolder .button--outline
+        {position: relative; z-index: 1;}
+        .fileUploadHolder:active .button--outline {
+            background-color: rgba(18,132,255,0.2);
+            border: 1px solid #1284ff;
+            color: #1284ff;
+            opacity: 1;
+        }
+        .fileUploadHolder:hover .button--outline {
+            border: 1px solid #1284ff;
+            -webkit-transition: 0;
+            -moz-transition: 0;
+            -o-transition: 0;
+            transition: 0;
+        }
+.edit-profile-text
+{font-size: 14px; line-height: 20px; color: #6d6d72;  padding: 0; margin: 15px 0 0 0 !important;}
+.edit-profile-text.right
+{color: #0f0;}
+.edit-profile-text.error
+{color: #f00;}
+.profile-note-holder {
     margin-bottom: 15px;
 } 
-.profile-settings-form .text-input {
-    width: 100%;
-    background: #fff;
-}
+.profile-name-holder .text-input
+{width: 100%; background: #fff;}
 
-
+.clr
+{clear: both;}
 
 .status.green {
 	color: #0bca24;
