@@ -205,9 +205,9 @@
     /*
      * задаем контроллер для представления startup.html
      * для модуля Onsen
-     * область действия $scope .register-login-page
+     * область действия $scope .startup-page
      */
-    Onsen.controller('RegisterLoginFormCtrl', function ($scope, $rootScope, $http) {
+    Onsen.controller('StartupCtrl', function ($scope, $rootScope, $http) {
         $scope.register = function () {
             var url = serverName + "/api/user";
             $http
@@ -257,7 +257,7 @@
     /*
      * задаем контроллер для представления profile.html
      * для модуля Onsen
-     * область действия $scope .home-page
+     * область действия $scope .profile-page
      */
     Onsen.controller('ProfileCtrl', function ($scope, $rootScope, $http) {
         
@@ -290,7 +290,7 @@
      * для модуля Onsen
      * область действия $scope .profile-settings-page
      */
-    Onsen.controller('EditProfileCtrl', function ($scope, $rootScope, $timeout, $http, Upload) {
+    Onsen.controller('ProfileSettingsCtrl', function ($scope, $rootScope, $timeout, $http, Upload) {
         $scope.showUploadStatus = false;
    
         $scope.changeName = function(){
@@ -350,4 +350,13 @@
             }
         };
     });
+    
+    /*
+     * задаем контроллер для ленты обновлений пользователя
+     * для модуля Onsen
+     * область действия $scope .feed-page
+     */
+    Onsen.controller('FeedCtrl', function ($scope, $rootScope) {
+        
+    })
 })();

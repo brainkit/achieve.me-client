@@ -21,11 +21,11 @@ form .ng-invalid.ng-dirty
 form .ng-valid.ng-dirty
 {background-color: rgba(0,255,0,0.05);}
 
-.register-login-page
+.startup-page
 {height: 100%;}
-    .register-login-page .logo-block
+    .startup-page .logo-block
     {padding-top: 118px; text-align: center;}
-        .register-login-page .logo-block img
+        .startup-page .logo-block img
         {width: 225px; height: auto;}
     .form-control-holder
     {position: relative;}
@@ -60,22 +60,14 @@ form .ng-valid.ng-dirty
 	color: #ffffff;
 	padding: 26px 19px 35px;
 }
-
-.hero h1 {
-	margin: 0;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 200;
-	font-size: 25px;
-}
-
-.hero p {
-	margin: 20px 0 0;
-	font-size: 15px;
-}
-
-.social-types-list .list__item {
-	margin: 0 0 0 15px;
-}
+    .hero h1
+    {margin: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 200; font-size: 25px;}
+    .hero p
+    {margin: 20px 0 0;  font-size: 15px;}
+.social-types-list
+{}
+    .social-types-list .list__item
+    {margin: 0 0 0 15px;}
 
 .social-types-list .social-type-icon {
 	vertical-align: middle;
