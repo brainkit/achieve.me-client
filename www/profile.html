@@ -1,7 +1,12 @@
 <!-- Шаблон профиля пользователя -->
 <div class="profile-page" ng-controller="ProfileCtrl">
     <ons-toolbar>
-        <div class="center" ng-click="getUserProfileSettings(true)">{{$root.userName}}</div>
+        <div class="center">{{$root.userName}}</div>
+        <div class="right top-toolbar-icon" ng-click="getUserProfileSettings(true)">
+            <ons-icon
+                icon="ion-gear-a">
+            </ons-icon>
+        </div>
     </ons-toolbar>
 
     <div class="hero">

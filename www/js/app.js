@@ -79,8 +79,9 @@
      */
     Onsen.controller('BodyCtrl', function ($scope, $rootScope, $http) {
 
+        $rootScope.serverName = serverName;
+        
         $rootScope.hideTabs = true;
-
         $scope.alertDialog = function(title, message) {
             ons.notification.alert({'title': title, 'message': message});
         }
@@ -122,15 +123,29 @@
             $scope.alertDialog('Внимание!','Перед началом использования приложения Вам необходимо ввести свое имя и при возможности добавить аватар для узнаваемости');
         }
         
-        $rootScope.userName = '';
-        //для тулбара нужно перейти в родительский скопе
         $rootScope.userPhotoDefault = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
+        // инициализация настроек пользователя
+        $rootScope.userName = '';
         $rootScope.userPhoto = $rootScope.userPhotoDefault;
+        $rootScope.created_at = '';
+        $rootScope.deleted_at = null;
+        $rootScope.updated_at = '';
+        $rootScope.interests = '';
+        $rootScope.rating = 0;
+        $rootScope.social_integration = 0;
+        $rootScope.user_id = 0;
         
         $scope.goToHomePage = function() {
             if(hash){
                 var url = serverName + "/api/user-settings?hash=" + hash;
                 $http.get(url).success(function (data){
+                    $rootScope.created_at = data.created_at;
+                    $rootScope.deleted_at = data.deleted_at;
+                    $rootScope.updated_at = data.updated_at;
+                    $rootScope.interests = data.interests;
+                    $rootScope.rating = data.rating;
+                    $rootScope.social_integration = data.social_integration;
+                    $rootScope.user_id = data.user_id;
                     if(data.name != ''){
                         $rootScope.userName = data.name;
                         $scope.showTabBar();
@@ -356,7 +371,69 @@
      * для модуля Onsen
      * область действия $scope .feed-page
      */
-    Onsen.controller('FeedCtrl', function ($scope, $rootScope) {
+    Onsen.controller('FeedCtrl', function ($scope, $rootScope, $http) {
+        $scope.showEmptyFeedPart = false;
+        $scope.showNotEmptyFeedPart = false;
         
-    })
+        $scope.getUserFeed = function(userId){
+            var url = serverName + "/api/users/subs/achievements/"+userId+"?hash=" + hash;
+            $http.get(url).success(function (data){
+                //console.log(data);
+                if(data.achievements.length > 0){
+                    $scope.showEmptyFeedPart = false;
+                    $scope.showNotEmptyFeedPart = true;
+                }else{
+                    $scope.showEmptyFeedPart = true;
+                    $scope.showNotEmptyFeedPart = false;
+                }
+            }).error(function(){
+                //alert("error");
+            });
+        };
+        
+        $scope.getSubscriptionsPage = function(type){
+            $rootScope.subscriptionsPageType = type;
+            $rootScope.screenNavPushPage('subscriptions.html', 'slide');
+        };
+        
+        $scope.getUserFeed($rootScope.user_id);
+        
+    });
+    
+    /*
+     * задаем контроллер для страницы подписчиков/поиска
+     * для модуля Onsen
+     * область действия $scope .subscriptions-page
+     */
+    Onsen.controller('SubscriptionsCtrl', function ($scope, $rootScope, $http) {
+        
+        $scope.showSearchField = false;
+        var title = '';
+        switch ($rootScope.subscriptionsPageType){
+            case 'userSearch':
+                title = 'Поиск по имени или email';
+                $scope.showSearchField = true;
+                break;
+            case 'userSocial':
+                title = 'Друзья из соц. сетей';
+                break;
+            case 'userRecomend':
+                title = 'Рекомендуемые пользователи';
+                break;
+            default :
+               title = 'Подписчики';
+               break;
+        }
+        $scope.subscriptionsPageTitle = title;
+        $scope.subscriptionsList = [];
+        $scope.getUserSearch = function(searchString){
+            var url = serverName + "/api/user-search/"+searchString+"?hash=" + hash;
+            $http.get(url).success(function (data){
+                console.log(data);
+                $scope.subscriptionsList = data[0];
+            }).error(function(){
+                //alert("error");
+            });
+        };
+    });
 })();

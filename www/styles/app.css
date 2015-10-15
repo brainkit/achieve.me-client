@@ -85,14 +85,18 @@ form .ng-valid.ng-dirty
  *	Subscriptions page
  *
  */
-
+.searchStringHolder
+{padding: 15px !important;}
+    .searchStringHolder input
+    {display: block; width: 100%;}
 .subscriptions-list .list__item {
 	padding: 0 15px;
 	display: table;
 	width: 100%;
 	height: 65px;
 }
-
+.subscriptions-list .no-element
+{display: block; line-height: 65px;}
 .subscriptions-list .user-photo {
 	display: table-cell;
 	vertical-align: middle;
@@ -104,6 +108,11 @@ form .ng-valid.ng-dirty
 	max-width: 100%;
 	vertical-align: middle;
 	height: auto;
+        width: 45px;
+        height: 45px;
+        -webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
 }
 
 
@@ -215,7 +224,12 @@ form .ng-valid.ng-dirty
 /*
  *	Profile settings page
  */
-
+.top-toolbar-icon
+{}
+    .top-toolbar-icon .ons-icon
+    {color: #13a2fe; line-height: 44px; padding: 0 15px;}
+    .top-toolbar-icon .ons-icon:active
+    {color: #000;}
 .change-profile-photo
 {padding: 20px 0 25px; border-bottom: 1px solid #dee1e5; text-align: center;}
     .change-profile-photo img
