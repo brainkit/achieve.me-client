@@ -2,9 +2,8 @@
 /********/
 (function () {
     'use strict';
-    //
+
     var serverName = "http://pixelweb.tmweb.ru";
-    //var hashKey = "$2y$10$MPO7P1iQjxtHewmnOO.GK.XJcwvGI7cLDkKaACISc8yI.Sfi9np1O";
     var hashKey = "$2y$10$WrSg4Qt2COjvnVhgMHTyAekZOtdUcnThxh3Yj2JO9BurcE36I3P0K";
     var deviceId = "6u3254165";
     var hash = localStorage.getItem('hash');
@@ -80,7 +79,6 @@
      */
     Onsen.controller('BodyCtrl', function ($scope, $rootScope, $http) {
 
-        //$scope.animation = 'slide';
         $rootScope.hideTabs = true;
 
         $scope.alertDialog = function(title, message) {
@@ -94,7 +92,7 @@
             if(push){
                 $rootScope.screenNavPushPage('profile-settings.html', 'slide');
             }else{
-                $rootScope.tabbarLoadPage('profile-settings.html');
+                screenTabs.setActiveTab(5);
             }
         }
         
@@ -126,42 +124,32 @@
         
         $rootScope.userName = '';
         //для тулбара нужно перейти в родительский скопе
-        //$scope.$parent.userName = $scope.userName;
         $rootScope.userPhotoDefault = 'images/user-placeholder.png';//заглушка аватарки по умолчанию
         $rootScope.userPhoto = $rootScope.userPhotoDefault;
         
         $scope.goToHomePage = function() {
-            /*$('#screenTabs').removeClass('ng-hide').removeAttr('ng-hide');
-            var tabBar = $('#screenTabs')
-                .removeClass('screen__tabs-hidden')
-                .find('.tab-bar');
-            tabBar
-                .removeClass('ng-hide')
-                .fadeIn();
-*/
             if(hash){
                 var url = serverName + "/api/user-settings?hash=" + hash;
                 $http.get(url).success(function (data){
-                    //console.log('data.name '+data.name);
                     if(data.name != ''){
                         $rootScope.userName = data.name;
-                        //$scope.$parent.userName = $scope.userName;
-                        //$scope.showTabBar();
                         $scope.showTabBar();
-                        $rootScope.tabbarLoadPage('tab1.html');
                         screenTabs.setActiveTab(0);
                     }else{
+                        $rootScope.userName = '';
                         $scope.noUserName();
                         $scope.getUserProfileSettings(false);
                     }
                     if((data.photo != '') && (data.photo != (serverName+'/'))){
                         $rootScope.userPhoto = serverName + data.photo;
+                    }else{
+                        $rootScope.userPhoto = $rootScope.userPhotoDefault;
                     }
                 }).error(function () {
                     //alert("error!");
                 });
             }else{
-                $rootScope.tabbarLoadPage('startup.html');
+               screenTabs.setActiveTab(4);
             }
         }
         
@@ -183,11 +171,10 @@
          */
         $rootScope.screenNavPushPage = function (id, animation) {
             if(typeof animation == "undefined" && !animation){
-                animation = 'fade';
+                animation = 'slide';
             }
             $('#screenTabs').attr('animation', animation);
             screenNav.pushPage(id, { animation: animation});
-            //screenTabs.loadPage(id);
         }
     })
     
@@ -200,19 +187,18 @@
         /*
          * Метод подгрузки стрницы
          */
-        $rootScope.tabbarLoadPage = function (id) {
+        /*$rootScope.tabbarLoadPage = function (id) {
             screenTabs.loadPage(id);
-        }
+        }*/
         
-        $scope.setActiveTab = function (page, tabId) {
+        /*$scope.setActiveTab = function (page, tabId) {
             $rootScope.tabbarLoadPage(page);
             screenTabs.setActiveTab(tabId);
-        }
+        }*/
         $scope.logoutProfile = function () {
             localStorage.removeItem('hash');
             hash = null;
             $rootScope.hideTabs = true;
-            $rootScope.tabbarLoadPage('startup.html');
         }
     })
 
@@ -224,9 +210,6 @@
     Onsen.controller('RegisterLoginFormCtrl', function ($scope, $rootScope, $http) {
         $scope.register = function () {
             var url = serverName + "/api/user";
-            //?hash=
-            // console.log("jsonp->"); 
-            //console.log(hash); 
             $http
                 .post(url, {hash: hashKey, email: $scope.email, password: $scope.password, deviceId: deviceId})
                 .success(function (data){
@@ -238,7 +221,7 @@
                     }
                 })
                 .error(function (data) {
-                    console.log(data);
+                    //console.log(data);
                 });
         }
         $scope.login = function () {
@@ -264,10 +247,9 @@
                         localStorage.setItem('hash', data.hash);
                         $scope.goToHomePage();
                     }
-                    
                 })
                 .error(function (data) {
-                    console.log(data);
+                    //console.log(data);
                 });
         }
     });
@@ -320,9 +302,9 @@
             }
             var url = serverName + "/api/user-settings/update";
             $http.post(url, {hash: hash, name: $rootScope.userName}).success(function (data){
-                $rootScope.userName = data.name;
+                //console.log(data);
             }).error(function(){
-                // alert("Логин или пароль введен неверно!");
+                alert("Логин или пароль введен неверно!");
             });
         };
         

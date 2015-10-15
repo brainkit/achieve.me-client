@@ -13816,7 +13816,10 @@ limitations under the License.
           this._getAnimatorOption(options).apply(element, oldPageElement, function() {
             if (options._removeElement) {
               oldPageElement.remove();
-              oldPageScope.$destroy();
+              try{
+			  oldPageScope.$destroy();
+			  } catch (err) {
+			  }
             }
             else {
               oldPageElement.css('display', 'none');
