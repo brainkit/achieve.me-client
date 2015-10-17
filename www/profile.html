@@ -13,7 +13,7 @@
         <div class="profile-card">
             <div class="profile-level">
                 <div class="circle">
-                    <div class="value">{{userLevel}}</div>
+                    <div class="value">{{$root.rating}}</div>
                     <div class="label">ур.</div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             Подписчики <span class="number">{{userSubscriberCount}}</span>
         </ons-list-item>
         <ons-list-item modifier="chevron">
-            Подписки <span class="number">{{userSubsCount}}</span>
+            Подписки <span class="number">{{$root.subUserCount}}</span>
         </ons-list-item>
     </ons-list>
 

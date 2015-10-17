@@ -134,9 +134,33 @@
         $rootScope.rating = 0;
         $rootScope.social_integration = 0;
         $rootScope.user_id = 0;
+        $rootScope.subUserCount = 0;
+        $rootScope.subUserAll = [];
+        //$rootScope.userSubscriberCount = 0;
+        
+        $scope.getSubUser = function(all, page) {
+            var url = serverName + "/api/user-subs?hash=" + hash;
+            if(all == true){
+               url += "&limit=1000000";
+            }else{
+                if(page > 0){
+                    url += "&page="+page;
+                }
+            }
+            $http.get(url).success(function (data){
+                if(all == true){
+                    $rootScope.subUserAll = data.data;
+                }
+                $rootScope.subUserCount = data.total;
+                //console.log(data);
+            }).error(function () {
+                //alert("error!");
+            });
+        };
         
         $scope.goToHomePage = function() {
             if(hash){
+                $scope.getSubUser(true, 0);
                 var url = serverName + "/api/user-settings?hash=" + hash;
                 $http.get(url).success(function (data){
                     $rootScope.created_at = data.created_at;
@@ -276,8 +300,6 @@
      */
     Onsen.controller('ProfileCtrl', function ($scope, $rootScope, $http) {
         
-        $scope.userLevel = 1;
-        $scope.userSubsCount = 0;
         $scope.userSubscriberCount = 0;
         $scope.countAch = 0;
 
@@ -408,11 +430,23 @@
     Onsen.controller('SubscriptionsCtrl', function ($scope, $rootScope, $http) {
         
         $scope.showSearchField = false;
+        $scope.subscriptionsListTotalClass = '';
+        
+        $scope.searchString = '';
+        $scope.loadNextPageShow = false;
+        $scope.currentPage = 1;
+        setInterval(function(){
+            if(inWindow(".loadNextPage").length){
+                $scope.getUserSearch($('#searchString').val(), false);
+            };
+        },500);
+        
         var title = '';
         switch ($rootScope.subscriptionsPageType){
             case 'userSearch':
                 title = 'Поиск по имени или email';
                 $scope.showSearchField = true;
+                $scope.subscriptionsListTotalClass = 'noPaddingTop';
                 break;
             case 'userSocial':
                 title = 'Друзья из соц. сетей';
@@ -425,12 +459,88 @@
                break;
         }
         $scope.subscriptionsPageTitle = title;
+
         $scope.subscriptionsList = [];
-        $scope.getUserSearch = function(searchString){
-            var url = serverName + "/api/user-search/"+searchString+"?hash=" + hash;
+        $scope.subscriptionsListLength = 0;
+        
+        $scope.getUserSearch = function(searchString, newSearchFlag){
+            var url = serverName + "/api/user-search/"+searchString+"?hash=" + hash +'&limit=1';
+            if(!newSearchFlag){
+                $scope.currentPage++;
+                url += "&page="+$scope.currentPage;
+            }else{
+                $scope.currentPage = 1;
+                $scope.loadNextPageShow = false;
+            }
             $http.get(url).success(function (data){
-                console.log(data);
-                $scope.subscriptionsList = data[0];
+                if(data.data){
+                    data.data.forEach(function(item, j) {
+                        $rootScope.subUserAll.forEach(function(subItem, i) {
+                            if(item.user_id == subItem.user_id){
+                                item.sub_flag = true;
+                            }else{
+                                if(!item.sub_flag){
+                                    item.sub_flag = false;
+                                }
+                            }
+                        })
+                    })
+                    if(data.current_page < data.last_page){
+                        $scope.currentPage = data.current_page;
+                        $scope.loadNextPageShow = true;
+                    }else{
+                        $scope.currentPage = data.last_page;
+                        $scope.loadNextPageShow = false;
+                    }
+                }
+                $scope.subscriptionsListLength = data.total;
+                if(!newSearchFlag){
+                    data.data.forEach(function(item, j) {
+                        $scope.subscriptionsList.push(item);
+                    })
+                }else{
+                    $scope.subscriptionsList = data.data;
+                }
+            }).error(function(){
+                //при ошибке сбрасываем пейджинацию
+                $scope.currentPage = 1;
+                $scope.loadNextPageShow = false;
+                //alert("error");
+            });
+        };
+
+        $scope.subUser = function(userId){
+            var url = serverName + "/api/user-subs";
+            $http.post(url, {'hash': hash, 'user_id_sub': userId}).success(function (data){
+                //обновляем данные о подписчиках
+                $scope.getSubUser(true, 0);
+                $scope.subscriptionsList.forEach(function(listItem, i) {
+                    if(listItem.user_id == userId){
+                        listItem.sub_flag = true;
+                    }
+                })
+            }).error(function(){
+                //alert("error");
+            });
+        };
+
+        $scope.unSubUser = function(userId){
+            var url = serverName + "/api/user-subs/"+userId+"?hash="+hash;
+            $http.delete(url).success(function (data){
+                //обновляем данные о подписчиках путем удаления id из массива - экономим ресурсы сервера
+                var tmpArray = [];
+                $rootScope.subUserAll.forEach(function(subItem, i) {
+                    if(subItem.user_id != userId){
+                        tmpArray.push(subItem);
+                    }
+                })
+                $rootScope.subUserAll = tmpArray;
+
+                $scope.subscriptionsList.forEach(function(listItem, i) {
+                    if(listItem.user_id == userId){
+                        listItem.sub_flag = false;
+                    }
+                })
             }).error(function(){
                 //alert("error");
             });

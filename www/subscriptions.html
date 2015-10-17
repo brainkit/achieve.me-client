@@ -8,14 +8,16 @@
     </ons-toolbar>
     
     <div class="inner searchStringHolder" ng-if="showSearchField">
-        <input ng-keyup="getUserSearch(searchString)" type="text" class="text-input" placeholder="Введите строку поиска" ng-model="searchString" value="{{searchString}}" />
+        <input id="searchString" ng-keyup="getUserSearch(searchString, true)" type="text" class="text-input" placeholder="Введите строку поиска" ng-model="searchString" value="{{searchString}}" />
     </div>
     <ons-list ng-if="!subscriptionsList.length" class="subscriptions-list">
         <ons-list-item>
             <strong class="no-element">Нет элементов для отображения</strong>
         </ons-list-item>
-    </ons-list>   
-    <ons-list ng-click="console.log(subscriptionsList)" ng-if="subscriptionsList.length" class="subscriptions-list">
+    </ons-list>
+    
+    <div ng-if="subscriptionsList.length" class="subtitle inner {{subscriptionsListTotalClass}}">Всего результатов: {{subscriptionsListLength}}</div>
+    <ons-list ng-if="subscriptionsList.length" class="subscriptions-list">
         <ons-list-item ng-repeat="item in subscriptionsList">
             <div class="user-photo">
                 <img ng-if="item.photo" ng-src="{{$root.serverName}}{{item.photo}}" alt="{{item.name}}" />
@@ -33,19 +35,18 @@
                 </ons-button>
             </div>
             <div class="follow-button-wrap" ng-if="item.user_id != $root.user_id">
-                <ons-button class="follow">
+                <ons-button ng-if="!item.sub_flag" class="follow" ng-click="subUser(item.user_id)">
                     <i class="icon user"></i>
                     <i class="icon add"></i>
                 </ons-button>
-                <!--
-                <ons-button class="unfollow">
+                <ons-button ng-if="item.sub_flag" class="unfollow" ng-click="unSubUser(item.user_id)">
                     <i class="icon user"></i>
                     <i class="icon mark"></i>
                 </ons-button>
-                -->
             </div>
         </ons-list-item>
     </ons-list>
+    <div ng-if="loadNextPageShow" class="loadNextPage"></div>
     <!--<ons-list class="subscriptions-list">
         <ons-list-item>
             <div class="user-photo">

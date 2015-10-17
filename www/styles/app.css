@@ -85,6 +85,14 @@ form .ng-valid.ng-dirty
  *	Subscriptions page
  *
  */
+.noMarginTop
+{margin-top: 0 !important;}
+.noPaddingTop
+{padding-top: 0 !important;}
+.subscriptions-page
+{}
+    .subscriptions-page .subtitle
+    {padding: 15px;}
 .searchStringHolder
 {padding: 15px !important;}
     .searchStringHolder input
@@ -797,3 +805,5 @@ ons-button.unfollow .icon.mark {
 	height: 12px;
 }
 
+.loadNextPage
+{display: block; padding: 25px; background: transparent url(../images/ajax-loader.gif) no-repeat 50% 50%;}
