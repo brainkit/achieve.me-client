@@ -546,4 +546,13 @@
             });
         };
     });
+    
+    /*
+     * задаем контроллер для ленты добавления обещания
+     * для модуля Onsen
+     * область действия $scope .add-achieve-page
+     */
+    Onsen.controller('AddAchieveCtrl', function ($scope, $rootScope, $http) {
+        
+    });
 })();

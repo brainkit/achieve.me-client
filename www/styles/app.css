@@ -807,3 +807,14 @@ ons-button.unfollow .icon.mark {
 
 .loadNextPage
 {display: block; padding: 25px; background: transparent url(../images/ajax-loader.gif) no-repeat 50% 50%;}
+
+.add-achieve-page-part
+{}
+    .add-achieve-page-part .inner .text-input
+    {margin-top: 15px; width: 100%; background: #fff;}
+    .add-achieve-page-part .inner .text-input:first-child
+    {margin-top: 20px;}
+    .add-achieve-page-part .inner .text-input:last-child
+    {margin-bottom: 20px;}
+    .add-achieve-page-part .subtitle
+    {padding: 15px 0; line-height: 14px;}
