@@ -1,394 +1,47 @@
 <!doctype html>
-<html lang="ru" ng-app="achieveMeApp">
+<html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
-        
-    <link rel="apple-touch-icon" sizes="57x57" href="icon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="icon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="icon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="icon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="icon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="icon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="icon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="icon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="icon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="icon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
-    <link rel="manifest" href="icon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
 
-    <title>Achieve.Me</title>  
+  <title>My App</title>  
+  
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+  <link rel="stylesheet" href="styles/app.css"/>
+  <link rel="stylesheet" href="styles/onsen-css-components.css">
 
-    <link rel="stylesheet" href="lib/onsen/css/onsenui.css"> 
-    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
-    <link rel="stylesheet" href="lib/onsen/css/ionicons/css/ionicons.min.css"> 
-    <link rel="stylesheet" href="styles/app.css"/>
-    <link rel="stylesheet" href="styles/animate.css"/>
-        
-    <script src="lib/onsen/js/angular/angular.js"></script>
-    <script src="lib/onsen/js/angular/angular-local-storage.min.js"></script>
-    <script src="lib/onsen/js/angular/angular-touch.min.js"></script>
-    <script src="lib/onsen/js/angular/angular-resource.min.js"></script>
-    <script src="lib/onsen/js/angular/angular-route.min.js"></script>
-    <script src="lib/onsen/js/angular/ng-file-upload.min.js"></script>
-    <script src="lib/onsen/js/angular/ng-file-upload-shim.min.js"></script>
-    <script src="lib/onsen/js/angular/ng-cordova.min.js"></script>
-    <script src="lib/onsen/js/onsenui.min.js"></script>
-    <script src="lib/jquery-1.11.1.min.js"></script>
-    <script src="lib/fastclick.js"></script>
-    
-    <script src="js/app.js"></script>
+  <script src="lib/onsen/js/angular/angular.js"></script>
+  <script src="lib/onsen/js/onsenui.js"></script>
+
+  <script>
+    ons.bootstrap();
+  </script>
+
+
 </head>
-<body id="bodyRegion" ng-controller="BodyCtrl">
-    <ons-tabbar
-        ng-controller="TabBarCtrl"
-        class="screen__tabs"
-        id="screenTabs"
-        var="screenTabs"
-        hide-tabs="{{$root.hideTabs}}"
-        animation="fade" >
-        <ons-tabbar-item
-            page="tab1.html"
-            icon="ion-home">
-        </ons-tabbar-item>
-        <ons-tabbar-item
-            page="tab2.html"
-            icon="ion-plus-round">
-        </ons-tabbar-item>
-        <ons-tabbar-item
-            page="tab3.html"
-            icon="ion-person">
-        </ons-tabbar-item>
-        <ons-tabbar-item
-            page="tab4.html"
-            icon="ion-gear-a">
-        </ons-tabbar-item>
-        <ons-tabbar-item
-            page="startup.html"
-            ng-click="logoutProfile()"
-            icon="ion-power">
-        </ons-tabbar-item>
-        <ons-tabbar-item
-            page="profile-settings-no-nav.html"
-            ng-hide="true"
-            icon="ion-power">
-        </ons-tabbar-item>
-    </ons-tabbar>
-	<!-- таб 1 -->
-	<script type="text/ons-template" id="tab1.html">
-		<ons-navigator var="screenNav" ng-controller="NavCtrl">
-			<ons-page modifier="feed" id="feed.html">
-<!-- Шаблон ленты обновлений пользователя -->
-<div class="feed-page" ng-controller="FeedCtrl">
-    <div class="feed-page-part" ng-if="showEmptyFeedPart">
-        <div class="hero">
-            <h1>В вашей ленте<br/>обновлений пусто.</h1>
-        </div>
-        <div class="subtitle inner">Найти друзей</div>
-        <ons-list class="padded-list">
-            <ons-list-item modifier="chevron" ng-click="getSubscriptionsPage('userSearch')">
-                Поиск по имени или email
-            </ons-list-item>
-            <ons-list-item modifier="chevron" ng-click="getSubscriptionsPage('userSocial')">
-                Друзья из соц. сетей
-            </ons-list-item>
-            <ons-list-item modifier="chevron" ng-click="getSubscriptionsPage('userRecomend')">
-                Рекомендуемые пользователи
-            </ons-list-item>
-        </ons-list>
-    </div>
-    <div class="feed-page-part" ng-if="showNotEmptyFeedPart">
-        <ons-toolbar>
-            <div class="center">Лента обновлений</div>
-        </ons-toolbar>
 
-        <div class="divider"></div>
+<body>
+  <ons-page>
 
-        <div class="feed-item">
-            <div class="author-row inner">
-                <div class="user-photo">
-                    <img src="images/user-photo-small.jpg" alt="" width="25" height="25">
-                </div>
-                <div class="user-name">Вася</div>
-                <div class="date"><i class="icon clock"></i>3 дня назад</div>
-            </div>
+    <div class="login-page">
+      <div class="logo-block">
+        <img src="images/logo@2x.png" alt="" width="225" height="44">
+      </div>
 
-            <ons-list>
-                <ons-list-item modifier="chevron">
-                    <p>Длиный, очень длиный и интересный заголовок цели.</p>
-                    <div class="status blue"><i class="icon fav blue"></i>1 000 Р<i class="icon fav blue"></i>7 дней</div>
-                </ons-list-item>
-            </ons-list>
+      <div class="login-form">
 
-            <div class="comment-like">
-                <i class="icon comment"></i>Комментарии<i class="icon heart outline"></i>Поддержать
-            </div>
+        <input type="email" placeholder="Email" class="text-input" value="">
 
-            <div class="likes-block inner">
-                <i class="icon heart gray"></i><span class="blue">Вася, Maria L., Tomas Fortis</span> и еще 10 человек
-            </div>
-        </div>
-        <div class="divider"></div>
-        <div class="feed-item">
-            <div class="author-row inner">
-                <div class="user-photo">
-                    <img src="images/user-photo-small.jpg" alt="" width="25" height="25">
-                </div>
-                <div class="user-name">Вася</div>
-                <div class="date"><i class="icon clock"></i>3 дня назад</div>
-            </div>
+        <input type="password" placeholder="Пароль" class="text-input" value="">
 
-            <ons-list>
-                <ons-list-item modifier="chevron">
-                    <p>Длиный, очень длиный и интересный заголовок цели.</p>
-                    <div class="status blue"><i class="icon fav blue"></i>1 000 Р<i class="icon fav blue"></i>7 дней</div>
-                </ons-list-item>
-            </ons-list>
-            <div class="comment-like">
-                <i class="icon comment"></i>Комментарии<i class="icon heart outline"></i>Поддержать
-            </div>
-            <div class="likes-block inner">
-                <i class="icon heart gray"></i><span class="blue">Вася, Maria L., Tomas Fortis</span> и еще 10 человек
-            </div>
-        </div>
-        <div class="divider"></div>
-        <div class="feed-item">
-            <div class="author-row inner">
-                <div class="user-photo">
-                    <img src="images/user-photo-small.jpg" alt="" width="25" height="25">
-                </div>
-                <div class="user-name">Вася</div>
-                <div class="date"><i class="icon clock"></i>3 дня назад</div>
-            </div>
+        <ons-button class="signup-button button--large">Регистрация</ons-button>
 
-            <ons-list>
-                <ons-list-item modifier="chevron">
-                    <p>Длиный, очень длиный и интересный заголовок цели.</p>
-                    <div class="status blue"><i class="icon fav blue"></i>1 000 Р<i class="icon fav blue"></i>7 дней</div>
-                </ons-list-item>
-            </ons-list>
-            <div class="comment-like">
-                <i class="icon comment"></i>Комментарии<i class="icon heart outline"></i>Поддержать
-            </div>
-            <div class="likes-block inner">
-                <i class="icon heart gray"></i><span class="blue">Вася, Maria L., Tomas Fortis</span> и еще 10 человек
-            </div>
-        </div>
-    </div>
-    
-</div>
-			</ons-page>
-		</ons-navigator>
-	</script>
-	<!-- таб 2 -->
-	<script type="text/ons-template" id="tab2.html">
-		<ons-navigator var="screenNav" ng-controller="NavCtrl">
-			<ons-page modifier="add-achieve" id="add-achieve.html">
-<!-- Шаблон добавления обещания -->
-<div class="add-achieve-page" ng-controller="AddAchieveCtrl">
-	<ons-toolbar>
-		<div class="center">Ваша цель</div>
-	</ons-toolbar>
-	<div class="add-achieve-page-part">
-		<ons-list class="achieve-settings-list">
-			<ons-list-item class="inner">
-				<input type="text" class="text-input" placeholder="Заголовок">
-				<input type="text" class="text-input" placeholder="Описание">
-			</ons-list-item>
-			<ons-list-item class="inner">
-				<div class="subtitle inner">Срок</div>
-				
-			</ons-list-item>
-		</ons-list>
-    </div>
-</div>
-			</ons-page>
-		</ons-navigator>
-	</script>
-	<!-- таб 3 -->
-	<script type="text/ons-template" id="tab3.html">
-		<ons-navigator var="screenNav" ng-controller="NavCtrl">
-			<ons-page modifier="feed" id="feed.html">
-			</ons-page>
-		</ons-navigator>
-	</script>
-	<!-- таб 4 -->
-	<script type="text/ons-template" id="tab4.html">
-		<ons-navigator var="screenNav" ng-controller="NavCtrl">
-			<ons-page modifier="profile" id="profile.html">
-<!-- Шаблон профиля пользователя -->
-<div class="profile-page" ng-controller="ProfileCtrl">
-    <ons-toolbar>
-        <div class="center">{{$root.userName}}</div>
-        <div class="right top-toolbar-icon" ng-click="getUserProfileSettings(true)">
-            <ons-icon
-                icon="ion-gear-a">
-            </ons-icon>
-        </div>
-    </ons-toolbar>
-
-    <div class="hero">
-        <div class="profile-card">
-            <div class="profile-level">
-                <div class="circle">
-                    <div class="value">{{$root.rating}}</div>
-                    <div class="label">ур.</div>
-                </div>
-            </div>
-
-            <div class="profile-photo" ng-click="getUserProfileSettings(true)">
-                <div class="user-photo">
-                    <img ng-src="{{$root.userPhoto}}" alt="{{$root.userName}}">
-                </div>
-            </div>
-
-            <div class="profile-actions">
-                <ons-button class="follow">
-                    <i class="icon user"></i>
-                    <i class="icon add"></i>
-                </ons-button>
-            </div>
-        </div>
+        <ons-button class="login-button button--large button--light">Вход</ons-button>
+      </div>
     </div>
 
-    <ons-list class="">
-        <ons-list-item modifier="chevron">
-            Подписчики <span class="number">{{userSubscriberCount}}</span>
-        </ons-list-item>
-        <ons-list-item modifier="chevron">
-            Подписки <span class="number">{{$root.subUserCount}}</span>
-        </ons-list-item>
-    </ons-list>
+  </ons-page>
 
-    <div class="divider"></div>
-
-    <ons-list class="goals-list">
-        <ons-list-item class="header">
-            <strong>Цели</strong><span class="number">{{countAch}}</span>
-        </ons-list-item>
-        <ons-list-item modifier="chevron" ng-repeat="item in itemAch">
-            <ons-row>
-                <ons-col>
-                    <div class="title" title="{{item.description}}">{{item.title}}</div>
-                    <div class="status green"><i class="icon fav green"></i>1 000 Р<i class="icon fav green"></i>Достигнуто</div>
-                </ons-col>
-            </ons-row>
-        </ons-list-item>
-        <ons-list-item modifier="chevron" ng-click="">
-            <i class="icon ion-plus"></i> Добавить цель
-        </ons-list-item>
-    </ons-list>
-</div>
-			</ons-page>
-		</ons-navigator>
-	</script>
-	<!-- таб 5 -->
-	<script type="text/ons-template" id="startup.html">
-		<ons-navigator var="screenNav" ng-controller="NavCtrl">
-			<ons-page modifier="startup" >
-<!-- Шаблон страницы входа/регистрации -->
-<div class="startup-page" ng-controller="StartupCtrl" ng-cloak>
-    <div class="logo-block">
-        <img src="images/logo@2x.png" alt="logo">
-    </div>
-    <div class="register-login-form">
-        <form 
-            name="registerLoginForm"
-            id="registerLoginForm"
-            method="post">
-            <div class="form-control-holder">
-                <input 
-                    type="email"
-                    name="email"
-                    ng-model="email"
-                    placeholder="Email"
-                    class="text-input form-control"
-                    value=""
-                    required="true" />
-               <div class="error" ng-show="registerLoginForm.email.$invalid && registerLoginForm.email.$dirty">
-                    <span ng-show="registerLoginForm.email.$error.email">
-                        Введите правильный email
-                    </span>
-                    <span ng-show="registerLoginForm.email.$error.required">
-                        Поле не должно быть пустым
-                    </span>
-                </div>
-            </div>
-            <div class="form-control-holder">
-                <input
-                    type="password"
-                    name="password"
-                    ng-model="password"
-                    ng-minlength="3"
-                    placeholder="Пароль"
-                    class="text-input form-control"
-                    value=""
-                    required="true" />
-                <div class="error" ng-show="registerLoginForm.password.$invalid && registerLoginForm.password.$dirty">
-                    <span ng-show="registerLoginForm.password.$error.required">
-                        Поле не должно быть пустым
-                    </span>
-                    <span ng-show="registerLoginForm.password.$error.minlength">
-                        Поле должно содержать более 3-х символов
-                    </span>
-                </div>
-            </div>
-            <ons-button
-                ng-disabled="registerLoginForm.$invalid"
-                ng-click="register()"
-                class="signup-button button--large">
-                Регистрация
-            </ons-button>
-            <ons-button
-                ng-disabled="registerLoginForm.$invalid"
-                ng-click="login()"
-                class="login-button button--large button--light">
-                Вход
-            </ons-button>
-        </form>
-    </div>
-</div>
-			</ons-page>
-		</ons-navigator>
-	</script>
-	<!-- таб 6 -->
-	<script type="text/ons-template" id="profile-settings-no-nav.html">
-		<ons-navigator var="screenNav" ng-controller="NavCtrl">
-			<ons-page modifier="profile-settings-no-nav" id="profile-settings-no-nav.html">
-<!-- Шаблон настройки профиля пользователя -->
-<div class="profile-settings-page" ng-controller="EditProfileCtrl">
-    <ons-toolbar>
-        <div class="center">Настройки профиля</div>
-    </ons-toolbar>
-    <div class="change-profile-photo">
-        <img ng-src="{{$root.userPhoto}}" alt="{{$root.userName}}" />
-        <!--<div class="image-label">{{userPhotoLabel}}</div>-->
-        <div class="clr"></div>
-        <div class="fileUploadHolder avatarUploadHolder">
-            <input type="file" ngf-select="uploadAvatar(uploadPhoto)" ng-model="uploadPhoto" name="photo" accept="image/*" />
-            <ons-button class="button--outline" ng-click="uploadAvatar()">Изменить аватар</ons-button>
-        </div>
-        <p class="edit-profile-text status {{uploadStatusClass}}" ng-show="showUploadStatus">{{uploadStatus}}</p>
-    </div>
-    <div class="subtitle inner">Изменить имя</div>
-    <div class="inner profile-name-holder">
-        <input ng-keyup="changeName()" type="text" class="text-input" placeholder="Ваше имя" ng-model="$root.userName" value="{{$root.userName}}" />
-    </div>
-    <div class="inner profile-note-holder">
-        <p class="edit-profile-text"> Максимальный размер файла: 2Мб. Изменения сохранятся автоматически.</p>
-    </div>
-</div>   
-			</ons-page>
-		</ons-navigator>
-	</script>
-
-    <script src="js/script.js"></script>
 </body>  
 </html>

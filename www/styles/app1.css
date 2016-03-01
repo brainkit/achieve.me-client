@@ -1,47 +1,47 @@
+body
+{background: #fff url('../images/logo@2x.png') no-repeat 50% 50%;}
+
+/*
+ *	Welcome page
+ */
+.welcome-page
+{height: 100%; background: #fff;}
+    .welcome-page .logo-block
+    {padding-top: 118px; text-align: center;}
+        .welcome-page .logo-block img
+        {width: 225px; height: auto;}
+
 /*
  *	Login page
- *
  */
+form .ng-invalid-required.ng-dirty
+{background-color: rgba(255,0, 0,0.1);}
+form .ng-invalid.ng-dirty
+{background-color: lightgoldenrodyellow;}
+form .ng-valid.ng-dirty
+{background-color: rgba(0,255,0,0.05);}
 
-.login-page {
-	height: 100%;
-}
-
-.login-page .logo-block {
-	padding-top: 118px;
-	text-align: center;
-}
-
-.login-page .login-form {
-	margin-top: 42px;
-	padding: 0 48px;
-}
-
-.login-page .login-form input[type="email"],
-.login-page .login-form input[type="password"] {
-	width: 100%;
-	margin-top: 15px;
-}
-
-.login-page .login-form input:first-child {
-	margin-top: 0;
-}
-
-.login-page .login-form .signup-button {
-	margin-top: 25px;
-}
-
-
-.login-page .login-form .login-button {
-	position: absolute;
-	bottom: 35px;
-	width: auto;
-	left: 48px;
-	right: 48px;
-}
-
-
-
+.startup-page
+{height: 100%;}
+    .startup-page .logo-block
+    {padding-top: 118px; text-align: center;}
+        .startup-page .logo-block img
+        {width: 225px; height: auto;}
+    .form-control-holder
+    {position: relative;}
+        .form-control-holder .error
+        {color: red; font-weight: bold; margin: 5px 10px 15px 10px;}
+            .form-control-holder .error span
+            {}
+    .register-login-form
+    {margin-top: 28px; padding: 0 48px;}
+        .register-login-form input[type="email"],
+        .register-login-form input[type="password"]
+        {width: 100%; margin-top: 15px;}
+        .register-login-form .signup-button
+        {margin-top: 25px;}
+        .register-login-form .login-button
+        {margin-top: 15px;}
 
 /*
  *	Social page
@@ -60,22 +60,14 @@
 	color: #ffffff;
 	padding: 26px 19px 35px;
 }
-
-.hero h1 {
-	margin: 0;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 200;
-	font-size: 25px;
-}
-
-.hero p {
-	margin: 20px 0 0;
-	font-size: 15px;
-}
-
-.social-types-list .list__item {
-	margin: 0 0 0 15px;
-}
+    .hero h1
+    {margin: 0; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: 200; font-size: 25px;}
+    .hero p
+    {margin: 20px 0 0;  font-size: 15px;}
+.social-types-list
+{}
+    .social-types-list .list__item
+    {margin: 0 0 0 15px;}
 
 .social-types-list .social-type-icon {
 	vertical-align: middle;
@@ -93,14 +85,26 @@
  *	Subscriptions page
  *
  */
-
+.noMarginTop
+{margin-top: 0 !important;}
+.noPaddingTop
+{padding-top: 0 !important;}
+.subscriptions-page
+{}
+    .subscriptions-page .subtitle
+    {padding: 15px;}
+.searchStringHolder
+{padding: 15px !important;}
+    .searchStringHolder input
+    {display: block; width: 100%;}
 .subscriptions-list .list__item {
 	padding: 0 15px;
 	display: table;
 	width: 100%;
 	height: 65px;
 }
-
+.subscriptions-list .no-element
+{display: block; line-height: 65px;}
 .subscriptions-list .user-photo {
 	display: table-cell;
 	vertical-align: middle;
@@ -112,6 +116,11 @@
 	max-width: 100%;
 	vertical-align: middle;
 	height: auto;
+        width: 45px;
+        height: 45px;
+        -webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
 }
 
 
@@ -157,9 +166,9 @@
 }
 
 /*
- *	Profile page
- *
+ *	Profile page / Home page
  */
+
 
 .profile-card {
 	display: table;
@@ -202,11 +211,11 @@
 }
 
 .profile-card .profile-photo img {
-	max-width: 100%;
-	height: auto;
-	-webkit-border-radius: 46px;
-	-moz-border-radius: 46px;
-	border-radius: 46px;
+	width: 85px;
+	height: 85px;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
 	overflow: hidden;
 	border: 3px solid #ffffff;
 	display: block;
@@ -222,38 +231,60 @@
 
 /*
  *	Profile settings page
- *
  */
+.top-toolbar-icon
+{}
+    .top-toolbar-icon .ons-icon
+    {color: #13a2fe; line-height: 44px; padding: 0 15px;}
+    .top-toolbar-icon .ons-icon:active
+    {color: #000;}
+.change-profile-photo
+{padding: 20px 0 25px; border-bottom: 1px solid #dee1e5; text-align: center;}
+    .change-profile-photo img
+    {width: 85px; height: 85px; overflow: hidden; border: 2px solid #13a2fe;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+    }
+    /*.change-profile-photo .image-label
+    {color: #bec4cd; margin-top: 5px;}*/
+    .fileUploadHolder
+    {margin: 0 auto; overflow: hidden;}
+    .avatarUploadHolder
+    {width: 164px; height: 34px; margin-top: 15px;}
+        .fileUploadHolder input
+        {position: absolute; z-index: 2; opacity: 0;}
+        .avatarUploadHolder input
+        {height: 34px;}
+        .fileUploadHolder .button--outline
+        {position: relative; z-index: 1;}
+        .fileUploadHolder:active .button--outline {
+            background-color: rgba(18,132,255,0.2);
+            border: 1px solid #1284ff;
+            color: #1284ff;
+            opacity: 1;
+        }
+        .fileUploadHolder:hover .button--outline {
+            border: 1px solid #1284ff;
+            -webkit-transition: 0;
+            -moz-transition: 0;
+            -o-transition: 0;
+            transition: 0;
+        }
+.edit-profile-text
+{font-size: 14px; line-height: 20px; color: #6d6d72;  padding: 0; margin: 15px 0 0 0 !important;}
+.edit-profile-text.right
+{color: #0f0;}
+.edit-profile-text.error
+{color: #f00;}
+.profile-note-holder {
+    margin-bottom: 15px;
+} 
+.profile-name-holder .text-input
+{width: 100%; background: #fff;}
 
-.change-profile-photo {
-	padding: 20px 0 25px;
-	border-bottom: 1px solid #dee1e5;
-	text-align: center;
-}
-
-.change-profile-photo img {
-	border: 2px solid #13a2fe;
-	-webkit-border-radius: 47px;
-	-moz-border-radius: 47px;
-	border-radius: 47px;
-	overflow: hidden;
-}
-
-.change-profile-photo .image-label {
-	color: #bec4cd;
-	margin-top: 5px;
-}
-
-.change-profile-photo ons-button {
-	margin-top: 14px;
-}
-
-.profile-settings-form .text-input {
-	width: 100%;
-	background: #ffffff;
-}
-
-
+.clr
+{clear: both;}
 
 .status.green {
 	color: #0bca24;
@@ -597,7 +628,7 @@
 }
 
 .inner {
-	padding: 0 20px;
+	padding: 0 15px;
 }
 
 .inner.wide {
@@ -774,3 +805,16 @@ ons-button.unfollow .icon.mark {
 	height: 12px;
 }
 
+.loadNextPage
+{display: block; padding: 25px; background: transparent url(../images/ajax-loader.gif) no-repeat 50% 50%;}
+
+.add-achieve-page-part
+{}
+    .add-achieve-page-part .inner .text-input
+    {margin-top: 15px; width: 100%; background: #fff;}
+    .add-achieve-page-part .inner .text-input:first-child
+    {margin-top: 20px;}
+    .add-achieve-page-part .inner .text-input:last-child
+    {margin-bottom: 20px;}
+    .add-achieve-page-part .subtitle
+    {padding: 15px 0; line-height: 14px;}
